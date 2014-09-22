@@ -1,0 +1,1402 @@
+<html>
+<head><meta http-equiv=Content-Type content="text/html; charset=UTF-8">
+<style type="text/css">
+<!--
+span.cls_002{font-family:Arial,serif;font-size:17.3px;color:rgb(0,0,0);font-weight:normal;font-style:normal;text-decoration: none}
+div.cls_002{font-family:Arial,serif;font-size:17.3px;color:rgb(0,0,0);font-weight:normal;font-style:normal;text-decoration: none}
+span.cls_003{font-family:Arial,serif;font-size:12.0px;color:rgb(0,0,0);font-weight:normal;font-style:normal;text-decoration: none}
+div.cls_003{font-family:Arial,serif;font-size:12.0px;color:rgb(0,0,0);font-weight:normal;font-style:normal;text-decoration: none}
+span.cls_004{font-family:Arial,serif;font-size:14.4px;color:rgb(0,0,0);font-weight:normal;font-style:normal;text-decoration: none}
+div.cls_004{font-family:Arial,serif;font-size:14.4px;color:rgb(0,0,0);font-weight:normal;font-style:normal;text-decoration: none}
+span.cls_005{font-family:Arial,serif;font-size:10.0px;color:rgb(0,0,0);font-weight:normal;font-style:normal;text-decoration: none}
+div.cls_005{font-family:Arial,serif;font-size:10.0px;color:rgb(0,0,0);font-weight:normal;font-style:normal;text-decoration: none}
+span.cls_006{font-family:Arial,serif;font-size:7.0px;color:rgb(0,0,0);font-weight:normal;font-style:normal;text-decoration: none}
+div.cls_006{font-family:Arial,serif;font-size:7.0px;color:rgb(0,0,0);font-weight:normal;font-style:normal;text-decoration: none}
+span.cls_007{font-family:Arial,serif;font-size:8.0px;color:rgb(0,0,0);font-weight:normal;font-style:normal;text-decoration: none}
+div.cls_007{font-family:Arial,serif;font-size:8.0px;color:rgb(0,0,0);font-weight:normal;font-style:normal;text-decoration: none}
+span.cls_008{font-family:Arial,serif;font-size:8.0px;color:rgb(0,178,0);font-weight:normal;font-style:normal;text-decoration: none}
+div.cls_008{font-family:Arial,serif;font-size:8.0px;color:rgb(0,178,0);font-weight:normal;font-style:normal;text-decoration: none}
+span.cls_009{font-family:Arial,serif;font-size:8.0px;color:rgb(25,25,255);font-weight:normal;font-style:normal;text-decoration: none}
+div.cls_009{font-family:Arial,serif;font-size:8.0px;color:rgb(25,25,255);font-weight:normal;font-style:normal;text-decoration: none}
+span.cls_010{font-family:Arial,serif;font-size:8.0px;color:rgb(255,0,0);font-weight:normal;font-style:normal;text-decoration: none}
+div.cls_010{font-family:Arial,serif;font-size:8.0px;color:rgb(255,0,0);font-weight:normal;font-style:normal;text-decoration: none}
+span.cls_011{font-family:Arial,serif;font-size:5.0px;color:rgb(0,0,0);font-weight:normal;font-style:normal;text-decoration: none}
+div.cls_011{font-family:Arial,serif;font-size:5.0px;color:rgb(0,0,0);font-weight:normal;font-style:normal;text-decoration: none}
+-->
+</style>
+<script type="text/javascript" src="image_src/wz_jsgraphics.js"></script>
+</head>
+<body>
+<div style="position:absolute;left:50%;margin-left:-297px;top:0px;width:595px;height:841px;border-style:outset;overflow:hidden">
+<div style="position:absolute;left:0px;top:0px">
+<img src="image_src/background01.jpg" width=595 height=841></div>
+<div style="position:absolute;left:175.52px;top:159.50px" class="cls_002"><span class="cls_002">Probabilistic Reasoning Over Time</span></div>
+<div style="position:absolute;left:238.42px;top:193.65px" class="cls_003"><span class="cls_003">Jack Foster Terwilliger</span></div>
+<div style="position:absolute;left:260.24px;top:217.10px" class="cls_003"><span class="cls_003">March 8, 2014</span></div>
+<div style="position:absolute;left:124.80px;top:257.47px" class="cls_004"><span class="cls_004">1</span></div>
+<div style="position:absolute;left:149.01px;top:257.47px" class="cls_004"><span class="cls_004">Introduction</span></div>
+<div style="position:absolute;left:124.80px;top:283.68px" class="cls_005"><span class="cls_005">In partially observable noisy environments, an agent must make decisions de-</span></div>
+<div style="position:absolute;left:124.80px;top:295.63px" class="cls_005"><span class="cls_005">spite its incomplete and potentially incorrect knowlege of the state of the en-</span></div>
+<div style="position:absolute;left:124.80px;top:307.59px" class="cls_005"><span class="cls_005">vironment.  In such cases, the agent must infer what is unobservable in the</span></div>
+<div style="position:absolute;left:124.80px;top:319.54px" class="cls_005"><span class="cls_005">environment from what is observable. In order to make use of its observations</span></div>
+<div style="position:absolute;left:124.80px;top:331.50px" class="cls_005"><span class="cls_005">for inference, the agent must also have prior knowlege about 1.)  its environ-</span></div>
+<div style="position:absolute;left:124.80px;top:343.45px" class="cls_005"><span class="cls_005">ment:  how the environment changes over time and 2.)  how observations are</span></div>
+<div style="position:absolute;left:124.80px;top:355.41px" class="cls_005"><span class="cls_005">emitted by the environment and sensed by the agent.</span></div>
+<div style="position:absolute;left:139.75px;top:367.36px" class="cls_005"><span class="cls_005">In this paper I will explore the use of HMMs and the forward, forwardback-</span></div>
+<div style="position:absolute;left:124.80px;top:379.32px" class="cls_005"><span class="cls_005">ward, and Viterbi algorithms to solve a robot location problem given a partially</span></div>
+<div style="position:absolute;left:124.80px;top:391.27px" class="cls_005"><span class="cls_005">observable maze. In my code, I used the linear algebra java library, la4j.</span></div>
+<div style="position:absolute;left:124.80px;top:419.81px" class="cls_004"><span class="cls_004">2</span></div>
+<div style="position:absolute;left:149.01px;top:419.81px" class="cls_004"><span class="cls_004">Sensor Robot Problem</span></div>
+<div style="position:absolute;left:124.80px;top:446.02px" class="cls_005"><span class="cls_005">In the Sensor Robot Problem, a color sensing robot is placed in a maze with</span></div>
+<div style="position:absolute;left:124.80px;top:457.97px" class="cls_005"><span class="cls_005">colored tiles and must locate its position in the maze.  The robot is given a</span></div>
+<div style="position:absolute;left:124.80px;top:469.93px" class="cls_005"><span class="cls_005">sequence of observations from its sensors (which are prone to error) and knowl-</span></div>
+<div style="position:absolute;left:124.80px;top:481.88px" class="cls_005"><span class="cls_005">ege of the maze.  It uses this information as evidence to form a probabilistic</span></div>
+<div style="position:absolute;left:124.80px;top:493.84px" class="cls_005"><span class="cls_005">distribution over possible locations.</span></div>
+<div style="position:absolute;left:139.75px;top:505.80px" class="cls_005"><span class="cls_005">Let’s rephrase this in HMM terms. The robot is given a transition model T</span></div>
+<div style="position:absolute;left:124.80px;top:517.75px" class="cls_005"><span class="cls_005">from it’s knowlege of the layout of the maze, an observation model O from its</span></div>
+<div style="position:absolute;left:124.80px;top:529.71px" class="cls_005"><span class="cls_005">knowlege of the coloring of the maze, and a sequence of observations E</span><span class="cls_006"><sub>1:t</sub></span><span class="cls_005"> picked</span></div>
+<div style="position:absolute;left:124.80px;top:541.66px" class="cls_005"><span class="cls_005">up from its sensors after moving around in the maze, and it must use the given</span></div>
+<div style="position:absolute;left:124.80px;top:553.62px" class="cls_005"><span class="cls_005">to determind X</span><span class="cls_006"><sub>t</sub></span><span class="cls_005">, the set of state variables at time t.</span></div>
+<div style="position:absolute;left:139.75px;top:565.57px" class="cls_005"><span class="cls_005">Now let’s rephrase this in probablistic terms. The set of state variables (the</span></div>
+<div style="position:absolute;left:124.80px;top:577.53px" class="cls_005"><span class="cls_005">legal locations in the maze) will be represented as X</span><span class="cls_006"><sub>t</sub></span><span class="cls_005"> and the set of state emis-</span></div>
+<div style="position:absolute;left:124.80px;top:589.48px" class="cls_005"><span class="cls_005">sions (the colors of the maze tiles) as E</span><span class="cls_006"><sub>t</sub></span><span class="cls_005">. The transmission model T determins</span></div>
+<div style="position:absolute;left:124.80px;top:601.44px" class="cls_005"><span class="cls_005">probability distribution over current state variables given past state values. T</span></div>
+<div style="position:absolute;left:124.80px;top:613.39px" class="cls_005"><span class="cls_005">can be represented as</span></div>
+<div style="position:absolute;left:266.15px;top:625.35px" class="cls_005"><span class="cls_005">P (X</span><span class="cls_006"><sub>t</sub></span><span class="cls_005">|X</span><span class="cls_006"><sub>0:t−1</sub></span><span class="cls_005">).</span></div>
+<div style="position:absolute;left:455.78px;top:625.35px" class="cls_005"><span class="cls_005">(1)</span></div>
+<div style="position:absolute;left:124.80px;top:643.21px" class="cls_005"><span class="cls_005">However this can be simplified based on a Markov Assumption, which states</span></div>
+<div style="position:absolute;left:124.80px;top:655.16px" class="cls_005"><span class="cls_005">that the current state is only depenant on the immidiately previous state. This</span></div>
+<div style="position:absolute;left:124.80px;top:667.12px" class="cls_005"><span class="cls_005">can be rephrased as</span></div>
+<div style="position:absolute;left:230.22px;top:688.91px" class="cls_005"><span class="cls_005">P (X</span><span class="cls_006"><sub>t</sub></span><span class="cls_005">|X</span><span class="cls_006"><sub>t−1</sub></span><span class="cls_005">)(M arkovAssum.),</span></div>
+<div style="position:absolute;left:455.78px;top:688.91px" class="cls_005"><span class="cls_005">(2)</span></div>
+<div style="position:absolute;left:124.80px;top:710.71px" class="cls_005"><span class="cls_005">which unlike the former statement, does not grow in size with time.</span></div>
+<div style="position:absolute;left:294.17px;top:740.60px" class="cls_005"><span class="cls_005">1</span></div>
+</div>
+<div style="position:absolute;left:50%;margin-left:-297px;top:851px;width:595px;height:841px;border-style:outset;overflow:hidden">
+<div style="position:absolute;left:0px;top:0px">
+<img src="image_src/background02.jpg" width=595 height=841></div>
+<div style="position:absolute;left:139.75px;top:124.91px" class="cls_005"><span class="cls_005">The observation model O determines a probability distribution over emission</span></div>
+<div style="position:absolute;left:124.80px;top:136.86px" class="cls_005"><span class="cls_005">values given past states and emissions.O can be represented as</span></div>
+<div style="position:absolute;left:255.84px;top:158.78px" class="cls_005"><span class="cls_005">P (E</span><span class="cls_006"><sub>t</sub></span><span class="cls_005">|X</span><span class="cls_006"><sub>0:t</sub></span><span class="cls_005">, E</span><span class="cls_006"><sub>1:t−1</sub></span><span class="cls_005">).</span></div>
+<div style="position:absolute;left:455.78px;top:158.78px" class="cls_005"><span class="cls_005">(3)</span></div>
+<div style="position:absolute;left:124.80px;top:180.70px" class="cls_005"><span class="cls_005">However, we can make a similar assumption about O as T , that is emissions are</span></div>
+<div style="position:absolute;left:124.80px;top:192.65px" class="cls_005"><span class="cls_005">only dependant on the state at time T . O can be rephrased as</span></div>
+<div style="position:absolute;left:237.16px;top:214.57px" class="cls_005"><span class="cls_005">P (E</span><span class="cls_006"><sub>t</sub></span><span class="cls_005">|X</span><span class="cls_006"><sub>t</sub></span><span class="cls_005">)(M arkovAssum.)</span></div>
+<div style="position:absolute;left:455.79px;top:214.57px" class="cls_005"><span class="cls_005">(4)</span></div>
+<div style="position:absolute;left:139.75px;top:236.49px" class="cls_005"><span class="cls_005">So with O and T , the joint probability of the state is</span></div>
+<div style="position:absolute;left:150.98px;top:258.41px" class="cls_005"><span class="cls_005">P (X</span><span class="cls_006"><sub>0:t</sub></span><span class="cls_005">, E</span><span class="cls_006"><sub>1:t</sub></span><span class="cls_005">) = P (X</span><span class="cls_006"><sub>0</sub></span><span class="cls_005">)P (X</span><span class="cls_006"><sub>1</sub></span><span class="cls_005">|X</span><span class="cls_006"><sub>0</sub></span><span class="cls_005">)P (E</span><span class="cls_006"><sub>1</sub></span><span class="cls_005">|X</span><span class="cls_006"><sub>1</sub></span><span class="cls_005">)...P (X</span><span class="cls_006"><sub>t</sub></span><span class="cls_005">|X</span><span class="cls_006"><sub>t</sub></span><span class="cls_005"> − 1)P (E</span><span class="cls_006"><sub>t</sub></span><span class="cls_005">|X</span><span class="cls_006"><sub>t</sub></span><span class="cls_005">)</span></div>
+<div style="position:absolute;left:455.78px;top:258.41px" class="cls_005"><span class="cls_005">(5)</span></div>
+<div style="position:absolute;left:124.80px;top:280.33px" class="cls_005"><span class="cls_005">or more concicely,</span></div>
+<div style="position:absolute;left:289.01px;top:301.50px" class="cls_005"><span class="cls_005">∏</span></div>
+<div style="position:absolute;left:190.69px;top:310.96px" class="cls_005"><span class="cls_005">P (X</span><span class="cls_006"><sub>0:t</sub></span><span class="cls_005">, E</span><span class="cls_006"><sub>1:t</sub></span><span class="cls_005">) = P (X</span><span class="cls_006"><sub>0</sub></span><span class="cls_005">)    P (X</span><span class="cls_006"><sub>i</sub></span><span class="cls_005">|X</span><span class="cls_006"><sub>i</sub></span><span class="cls_005"> − 1)P (E</span><span class="cls_006"><sub>i</sub></span><span class="cls_005">|X</span><span class="cls_006"><sub>i</sub></span><span class="cls_005">)</span></div>
+<div style="position:absolute;left:455.78px;top:310.96px" class="cls_005"><span class="cls_005">(6)</span></div>
+<div style="position:absolute;left:288.92px;top:325.70px" class="cls_006"><span class="cls_006">i=1</span></div>
+<div style="position:absolute;left:124.80px;top:341.59px" class="cls_005"><span class="cls_005">With the above, the location task in the Sensor Robot Problem can be defined</span></div>
+<div style="position:absolute;left:124.80px;top:353.54px" class="cls_005"><span class="cls_005">as calculating the expression:</span></div>
+<div style="position:absolute;left:271.70px;top:375.46px" class="cls_005"><span class="cls_005">P (X</span><span class="cls_006"><sub>t</sub></span><span class="cls_005">|E</span><span class="cls_006"><sub>1:t</sub></span><span class="cls_005">).</span></div>
+<div style="position:absolute;left:455.78px;top:375.46px" class="cls_005"><span class="cls_005">(7)</span></div>
+<div style="position:absolute;left:225.85px;top:622.45px" class="cls_005"><span class="cls_005">Figure 1: Hidden Markov Model</span></div>
+<div style="position:absolute;left:124.80px;top:650.28px" class="cls_003"><span class="cls_003">2.1</span></div>
+<div style="position:absolute;left:155.44px;top:650.28px" class="cls_003"><span class="cls_003">Maze Representation</span></div>
+<div style="position:absolute;left:124.80px;top:670.66px" class="cls_005"><span class="cls_005">The maze is represented as a 2d character array wrapped in a maze class.</span></div>
+<div style="position:absolute;left:124.80px;top:682.62px" class="cls_005"><span class="cls_005">Maze.java from the mazeworld assignment was modified to serve this pur-</span></div>
+<div style="position:absolute;left:124.80px;top:694.57px" class="cls_005"><span class="cls_005">pose.Mazes are written as .maz files.  Walls are represented with Xs and the</span></div>
+<div style="position:absolute;left:124.80px;top:706.53px" class="cls_005"><span class="cls_005">colors red, green, blue, yellow are represented respectively as r,g,b,y.</span></div>
+<div style="position:absolute;left:294.17px;top:740.60px" class="cls_005"><span class="cls_005">2</span></div>
+</div>
+<div style="position:absolute;left:50%;margin-left:-297px;top:1702px;width:595px;height:841px;border-style:outset;overflow:hidden">
+<div style="position:absolute;left:0px;top:0px">
+<img src="image_src/background03.jpg" width=595 height=841></div>
+<div style="position:absolute;left:125.67px;top:126.90px" class="cls_007"><span class="cls_007">the  following  is  a</span></div>
+<div style="position:absolute;left:221.77px;top:126.90px" class="cls_007"><span class="cls_007">4x4</span></div>
+<div style="position:absolute;left:241.97px;top:126.90px" class="cls_007"><span class="cls_007">maze  with</span></div>
+<div style="position:absolute;left:292.90px;top:126.90px" class="cls_007"><span class="cls_007">3</span></div>
+<div style="position:absolute;left:303.81px;top:126.90px" class="cls_007"><span class="cls_007">walls:</span></div>
+<div style="position:absolute;left:125.15px;top:145.83px" class="cls_007"><span class="cls_007">rXbg</span></div>
+<div style="position:absolute;left:124.73px;top:155.29px" class="cls_007"><span class="cls_007">bXrX</span></div>
+<div style="position:absolute;left:125.53px;top:164.76px" class="cls_007"><span class="cls_007">ybrg</span></div>
+<div style="position:absolute;left:125.53px;top:174.22px" class="cls_007"><span class="cls_007">ybrg</span></div>
+<div style="position:absolute;left:124.80px;top:204.10px" class="cls_003"><span class="cls_003">2.2</span></div>
+<div style="position:absolute;left:155.44px;top:204.10px" class="cls_003"><span class="cls_003">Transition Model</span></div>
+<div style="position:absolute;left:124.80px;top:224.49px" class="cls_005"><span class="cls_005">The transition model is represented as a SxS Matrix where S is the number of</span></div>
+<div style="position:absolute;left:124.80px;top:236.44px" class="cls_005"><span class="cls_005">state variables such that</span></div>
+<div style="position:absolute;left:238.87px;top:258.36px" class="cls_005"><span class="cls_005">T</span><span class="cls_006"><sub>ij</sub></span><span class="cls_005"> = P(X</span><span class="cls_006"><sub>t</sub></span><span class="cls_005"> = j|X</span><span class="cls_006"><sub>t−1</sub></span><span class="cls_005"> = i).</span></div>
+<div style="position:absolute;left:455.78px;top:258.36px" class="cls_005"><span class="cls_005">(8)</span></div>
+<div style="position:absolute;left:124.80px;top:280.28px" class="cls_005"><span class="cls_005">By representing only the legal locations, time and memory is saved when calcu-</span></div>
+<div style="position:absolute;left:124.80px;top:292.23px" class="cls_005"><span class="cls_005">lating probability distributions. I used the la4j library to implement the Matrix.</span></div>
+<div style="position:absolute;left:124.80px;top:304.19px" class="cls_005"><span class="cls_005">T is generated automatically from a provided maze by the following method.</span></div>
+<div style="position:absolute;left:110.61px;top:321.62px" class="cls_007"><span class="cls_007">1</span></div>
+<div style="position:absolute;left:125.37px;top:321.62px" class="cls_008"><span class="cls_008">//create  the  transition  model from an  ascii  representation  of  the</span></div>
+<div style="position:absolute;left:145.03px;top:331.09px" class="cls_008"><span class="cls_008">maze</span></div>
+<div style="position:absolute;left:110.61px;top:340.55px" class="cls_007"><span class="cls_007">2</span></div>
+<div style="position:absolute;left:125.37px;top:340.55px" class="cls_008"><span class="cls_008">//Each entry  is :  T (ij)</span></div>
+<div style="position:absolute;left:246.00px;top:340.55px" class="cls_008"><span class="cls_008">= P(X (t) = j</span></div>
+<div style="position:absolute;left:319.25px;top:340.55px" class="cls_008"><span class="cls_008">|  X</span></div>
+<div style="position:absolute;left:339.10px;top:340.55px" class="cls_008"><span class="cls_008">(t−1) = i)</span></div>
+<div style="position:absolute;left:110.61px;top:350.02px" class="cls_007"><span class="cls_007">3</span></div>
+<div style="position:absolute;left:125.37px;top:350.02px" class="cls_008"><span class="cls_008">//</span></div>
+<div style="position:absolute;left:110.61px;top:359.48px" class="cls_007"><span class="cls_007">4</span></div>
+<div style="position:absolute;left:125.37px;top:359.48px" class="cls_008"><span class="cls_008">//SxS where S  is  the number  of  variables</span></div>
+<div style="position:absolute;left:110.61px;top:368.94px" class="cls_007"><span class="cls_007">5</span></div>
+<div style="position:absolute;left:125.37px;top:368.94px" class="cls_008"><span class="cls_008">//</span></div>
+<div style="position:absolute;left:150.07px;top:368.94px" class="cls_008"><span class="cls_008">X1</span></div>
+<div style="position:absolute;left:200.88px;top:368.94px" class="cls_008"><span class="cls_008">X2</span></div>
+<div style="position:absolute;left:251.69px;top:368.94px" class="cls_008"><span class="cls_008">X3</span></div>
+<div style="position:absolute;left:110.61px;top:378.41px" class="cls_007"><span class="cls_007">6</span></div>
+<div style="position:absolute;left:125.37px;top:378.41px" class="cls_008"><span class="cls_008">//X1[P( x1 | x1 ) ] [ P( x1 | x2 ) ] [ P( x1 | x2 ) ] . . .</span></div>
+<div style="position:absolute;left:110.61px;top:387.87px" class="cls_007"><span class="cls_007">7</span></div>
+<div style="position:absolute;left:125.37px;top:387.87px" class="cls_008"><span class="cls_008">//</span></div>
+<div style="position:absolute;left:110.61px;top:397.34px" class="cls_007"><span class="cls_007">8</span></div>
+<div style="position:absolute;left:125.37px;top:397.34px" class="cls_008"><span class="cls_008">//</span></div>
+<div style="position:absolute;left:110.61px;top:406.80px" class="cls_007"><span class="cls_007">9</span></div>
+<div style="position:absolute;left:125.37px;top:406.80px" class="cls_008"><span class="cls_008">//X2[P( x2 | x1 ) ] [ P( x2 | x2 ) ] [ P( x1 | x2 ) ] . . .</span></div>
+<div style="position:absolute;left:106.37px;top:416.27px" class="cls_007"><span class="cls_007">10</span></div>
+<div style="position:absolute;left:125.37px;top:416.27px" class="cls_008"><span class="cls_008">//</span></div>
+<div style="position:absolute;left:106.37px;top:425.73px" class="cls_007"><span class="cls_007">11</span></div>
+<div style="position:absolute;left:125.37px;top:425.73px" class="cls_008"><span class="cls_008">//</span></div>
+<div style="position:absolute;left:106.37px;top:435.20px" class="cls_007"><span class="cls_007">12</span></div>
+<div style="position:absolute;left:125.37px;top:435.20px" class="cls_008"><span class="cls_008">//X3[P( x3 | x1 ) ] [ P( x3 | x2 ) ] [ P( x1 | x2 ) ] . . .</span></div>
+<div style="position:absolute;left:106.37px;top:444.66px" class="cls_007"><span class="cls_007">13</span></div>
+<div style="position:absolute;left:125.37px;top:444.66px" class="cls_008"><span class="cls_008">//</span></div>
+<div style="position:absolute;left:106.37px;top:454.12px" class="cls_007"><span class="cls_007">14</span></div>
+<div style="position:absolute;left:125.37px;top:454.12px" class="cls_008"><span class="cls_008">//</span></div>
+<div style="position:absolute;left:106.37px;top:463.59px" class="cls_007"><span class="cls_007">15</span></div>
+<div style="position:absolute;left:125.37px;top:463.59px" class="cls_008"><span class="cls_008">//X4[P( x4 | x1 ) ] [ P( x4 | x2 ) ] [ P( x1 | x2 ) ] . . .</span></div>
+<div style="position:absolute;left:106.37px;top:473.05px" class="cls_007"><span class="cls_007">16</span></div>
+<div style="position:absolute;left:125.37px;top:473.05px" class="cls_008"><span class="cls_008">//...</span></div>
+<div style="position:absolute;left:106.37px;top:482.52px" class="cls_007"><span class="cls_007">17</span></div>
+<div style="position:absolute;left:125.98px;top:482.52px" class="cls_009"><span class="cls_009">private</span><span class="cls_007">  Matrix  transitionModel(){</span></div>
+<div style="position:absolute;left:106.37px;top:491.98px" class="cls_007"><span class="cls_007">18</span></div>
+<div style="position:absolute;left:106.37px;top:501.45px" class="cls_007"><span class="cls_007">19</span></div>
+<div style="position:absolute;left:135.53px;top:501.45px" class="cls_008"><span class="cls_008">//Key = set  of  locations  Value = set  of  neighbors</span></div>
+<div style="position:absolute;left:106.37px;top:510.91px" class="cls_007"><span class="cls_007">20</span></div>
+<div style="position:absolute;left:135.76px;top:510.91px" class="cls_007"><span class="cls_007">Hashtable&lt;Integer ,  HashSet&lt;Integer>> topography= getTopography () ;</span></div>
+<div style="position:absolute;left:106.37px;top:520.38px" class="cls_007"><span class="cls_007">21</span></div>
+<div style="position:absolute;left:106.37px;top:529.84px" class="cls_007"><span class="cls_007">22</span></div>
+<div style="position:absolute;left:135.53px;top:529.84px" class="cls_008"><span class="cls_008">//size  is  number of variables  x  number of variables</span></div>
+<div style="position:absolute;left:106.37px;top:539.31px" class="cls_007"><span class="cls_007">23</span></div>
+<div style="position:absolute;left:135.53px;top:539.31px" class="cls_008"><span class="cls_008">//i</span></div>
+<div style="position:absolute;left:154.54px;top:539.31px" class="cls_008"><span class="cls_008">= Xt−1,  j  = Xt</span></div>
+<div style="position:absolute;left:106.37px;top:548.77px" class="cls_007"><span class="cls_007">24</span></div>
+<div style="position:absolute;left:135.83px;top:548.77px" class="cls_009"><span class="cls_009">double</span><span class="cls_007"> [][]  transition probabilities</span></div>
+<div style="position:absolute;left:317.13px;top:548.77px" class="cls_007"><span class="cls_007">=</span><span class="cls_009"> new  double</span><span class="cls_007"> [ variables . length</span></div>
+<div style="position:absolute;left:157.07px;top:558.23px" class="cls_007"><span class="cls_007">][];</span></div>
+<div style="position:absolute;left:106.37px;top:567.70px" class="cls_007"><span class="cls_007">25</span></div>
+<div style="position:absolute;left:106.37px;top:577.16px" class="cls_007"><span class="cls_007">26</span></div>
+<div style="position:absolute;left:135.53px;top:577.16px" class="cls_008"><span class="cls_008">//get P(X t|X t−1)  for  every  variable  pair</span></div>
+<div style="position:absolute;left:106.37px;top:586.63px" class="cls_007"><span class="cls_007">27</span></div>
+<div style="position:absolute;left:136.18px;top:586.63px" class="cls_009"><span class="cls_009">int</span><span class="cls_007">  i=0;</span></div>
+<div style="position:absolute;left:106.37px;top:596.09px" class="cls_007"><span class="cls_007">28</span></div>
+<div style="position:absolute;left:136.25px;top:596.09px" class="cls_009"><span class="cls_009">for</span></div>
+<div style="position:absolute;left:156.18px;top:596.09px" class="cls_007"><span class="cls_007">(</span><span class="cls_009">int</span><span class="cls_007">  variable:  variables){</span></div>
+<div style="position:absolute;left:106.37px;top:605.56px" class="cls_007"><span class="cls_007">29</span></div>
+<div style="position:absolute;left:146.62px;top:605.56px" class="cls_007"><span class="cls_007">transition probabilities [ i ]</span></div>
+<div style="position:absolute;left:286.64px;top:605.56px" class="cls_007"><span class="cls_007">=</span><span class="cls_009"> new  double</span><span class="cls_007"> [ variables . length ] ;</span></div>
+<div style="position:absolute;left:106.37px;top:615.02px" class="cls_007"><span class="cls_007">30</span></div>
+<div style="position:absolute;left:106.37px;top:624.49px" class="cls_007"><span class="cls_007">31</span></div>
+<div style="position:absolute;left:146.35px;top:624.49px" class="cls_009"><span class="cls_009">int</span><span class="cls_007">  j=0;</span></div>
+<div style="position:absolute;left:106.37px;top:633.95px" class="cls_007"><span class="cls_007">32</span></div>
+<div style="position:absolute;left:146.41px;top:633.95px" class="cls_009"><span class="cls_009">for</span></div>
+<div style="position:absolute;left:166.34px;top:633.95px" class="cls_007"><span class="cls_007">(</span><span class="cls_009">int</span><span class="cls_007">  pastVariable:  variables){</span></div>
+<div style="position:absolute;left:106.37px;top:643.42px" class="cls_007"><span class="cls_007">33</span></div>
+<div style="position:absolute;left:106.37px;top:652.88px" class="cls_007"><span class="cls_007">34</span></div>
+<div style="position:absolute;left:155.85px;top:652.88px" class="cls_008"><span class="cls_008">//get P(X t|X t−1)</span></div>
+<div style="position:absolute;left:106.37px;top:662.34px" class="cls_007"><span class="cls_007">35</span></div>
+<div style="position:absolute;left:155.85px;top:662.34px" class="cls_008"><span class="cls_008">//put  it  in  the  matrix</span></div>
+<div style="position:absolute;left:106.37px;top:671.81px" class="cls_007"><span class="cls_007">36</span></div>
+<div style="position:absolute;left:156.79px;top:671.81px" class="cls_007"><span class="cls_007">transition probabilities [ i ][ j]</span></div>
+<div style="position:absolute;left:312.05px;top:671.81px" class="cls_007"><span class="cls_007">= getTransitionProbability(</span></div>
+<div style="position:absolute;left:176.22px;top:681.27px" class="cls_007"><span class="cls_007">pastVariable ,  variable ,  topography);</span></div>
+<div style="position:absolute;left:106.37px;top:690.74px" class="cls_007"><span class="cls_007">37</span></div>
+<div style="position:absolute;left:156.53px;top:690.74px" class="cls_007"><span class="cls_007">j ++;</span></div>
+<div style="position:absolute;left:106.37px;top:700.20px" class="cls_007"><span class="cls_007">38</span></div>
+<div style="position:absolute;left:145.55px;top:700.20px" class="cls_007"><span class="cls_007">}</span></div>
+<div style="position:absolute;left:106.37px;top:709.67px" class="cls_007"><span class="cls_007">39</span></div>
+<div style="position:absolute;left:146.49px;top:709.67px" class="cls_007"><span class="cls_007">i ++;</span></div>
+<div style="position:absolute;left:294.17px;top:740.60px" class="cls_005"><span class="cls_005">3</span></div>
+</div>
+<div style="position:absolute;left:50%;margin-left:-297px;top:2553px;width:595px;height:841px;border-style:outset;overflow:hidden">
+<div style="position:absolute;left:0px;top:0px">
+<img src="image_src/background04.jpg" width=595 height=841></div>
+<div style="position:absolute;left:106.37px;top:126.90px" class="cls_007"><span class="cls_007">40</span></div>
+<div style="position:absolute;left:135.39px;top:126.90px" class="cls_007"><span class="cls_007">}</span></div>
+<div style="position:absolute;left:106.37px;top:136.37px" class="cls_007"><span class="cls_007">41</span></div>
+<div style="position:absolute;left:136.02px;top:136.37px" class="cls_009"><span class="cls_009">return new</span><span class="cls_007"> Basic2DMatrix(transition probabilities);</span></div>
+<div style="position:absolute;left:106.37px;top:145.83px" class="cls_007"><span class="cls_007">42</span></div>
+<div style="position:absolute;left:125.22px;top:145.83px" class="cls_007"><span class="cls_007">}</span></div>
+<div style="position:absolute;left:124.80px;top:175.71px" class="cls_003"><span class="cls_003">2.3</span></div>
+<div style="position:absolute;left:155.44px;top:175.71px" class="cls_003"><span class="cls_003">Observation Model</span></div>
+<div style="position:absolute;left:124.80px;top:196.09px" class="cls_005"><span class="cls_005">The observation model is represented as an array of SxS diagonal Matrices where</span></div>
+<div style="position:absolute;left:124.80px;top:208.05px" class="cls_005"><span class="cls_005">S is the number of state variables such that</span></div>
+<div style="position:absolute;left:257.10px;top:229.97px" class="cls_005"><span class="cls_005">O</span><span class="cls_006"><sub>i</sub></span><span class="cls_005"> = P(e</span><span class="cls_006"><sub>t</sub></span><span class="cls_005">|X</span><span class="cls_006"><sub>t</sub></span><span class="cls_005"> = i)</span></div>
+<div style="position:absolute;left:455.78px;top:229.97px" class="cls_005"><span class="cls_005">(9)</span></div>
+<div style="position:absolute;left:124.80px;top:251.88px" class="cls_005"><span class="cls_005">. Each matrix corresponds to an emission variable and the contents of each</span></div>
+<div style="position:absolute;left:124.80px;top:263.84px" class="cls_005"><span class="cls_005">matrix correspond to the probability of emission by the state variable.  I used</span></div>
+<div style="position:absolute;left:124.80px;top:275.79px" class="cls_005"><span class="cls_005">the la4j library to implement the Matrices.</span></div>
+<div style="position:absolute;left:139.75px;top:287.75px" class="cls_005"><span class="cls_005">O is generated automatically from a provided maze by the following method.</span></div>
+<div style="position:absolute;left:110.61px;top:305.18px" class="cls_007"><span class="cls_007">1</span></div>
+<div style="position:absolute;left:125.37px;top:305.18px" class="cls_008"><span class="cls_008">//build  the  observation  model</span></div>
+<div style="position:absolute;left:110.61px;top:314.65px" class="cls_007"><span class="cls_007">2</span></div>
+<div style="position:absolute;left:125.37px;top:314.65px" class="cls_008"><span class="cls_008">//a  list  of  matrices</span></div>
+<div style="position:absolute;left:110.61px;top:324.11px" class="cls_007"><span class="cls_007">3</span></div>
+<div style="position:absolute;left:125.37px;top:324.11px" class="cls_008"><span class="cls_008">//each  matrix  contains  the  probabilities  that a  state  would emit</span></div>
+<div style="position:absolute;left:145.60px;top:333.58px" class="cls_008"><span class="cls_008">the  given  observation  variable</span></div>
+<div style="position:absolute;left:110.61px;top:343.04px" class="cls_007"><span class="cls_007">4</span></div>
+<div style="position:absolute;left:125.37px;top:343.04px" class="cls_008"><span class="cls_008">//the  matrices  are  diagonal  so  that we can do matrix  multiplication</span></div>
+<div style="position:absolute;left:150.58px;top:352.51px" class="cls_008"><span class="cls_008">with  the  transition  model</span></div>
+<div style="position:absolute;left:110.61px;top:361.97px" class="cls_007"><span class="cls_007">5</span></div>
+<div style="position:absolute;left:125.37px;top:361.97px" class="cls_008"><span class="cls_008">//SxS where S  is  the number  of  variables</span></div>
+<div style="position:absolute;left:110.61px;top:371.44px" class="cls_007"><span class="cls_007">6</span></div>
+<div style="position:absolute;left:125.37px;top:371.44px" class="cls_008"><span class="cls_008">//</span></div>
+<div style="position:absolute;left:150.07px;top:371.44px" class="cls_008"><span class="cls_008">X1</span></div>
+<div style="position:absolute;left:170.40px;top:371.44px" class="cls_008"><span class="cls_008">X2</span></div>
+<div style="position:absolute;left:190.72px;top:371.44px" class="cls_008"><span class="cls_008">X3</span></div>
+<div style="position:absolute;left:211.04px;top:371.44px" class="cls_008"><span class="cls_008">X4</span></div>
+<div style="position:absolute;left:110.61px;top:380.90px" class="cls_007"><span class="cls_007">7</span></div>
+<div style="position:absolute;left:125.37px;top:380.90px" class="cls_008"><span class="cls_008">// X1[ p1 ][0</span></div>
+<div style="position:absolute;left:187.35px;top:380.90px" class="cls_008"><span class="cls_008">][0</span></div>
+<div style="position:absolute;left:207.68px;top:380.90px" class="cls_008"><span class="cls_008">][0</span></div>
+<div style="position:absolute;left:227.79px;top:380.90px" class="cls_008"><span class="cls_008">]</span></div>
+<div style="position:absolute;left:110.61px;top:390.36px" class="cls_007"><span class="cls_007">8</span></div>
+<div style="position:absolute;left:125.37px;top:390.36px" class="cls_008"><span class="cls_008">// X2[0</span></div>
+<div style="position:absolute;left:167.27px;top:390.36px" class="cls_008"><span class="cls_008">][p2][0</span></div>
+<div style="position:absolute;left:207.68px;top:390.36px" class="cls_008"><span class="cls_008">][0</span></div>
+<div style="position:absolute;left:227.79px;top:390.36px" class="cls_008"><span class="cls_008">]</span></div>
+<div style="position:absolute;left:110.61px;top:399.83px" class="cls_007"><span class="cls_007">9</span></div>
+<div style="position:absolute;left:125.37px;top:399.83px" class="cls_008"><span class="cls_008">// X3[0</span></div>
+<div style="position:absolute;left:167.03px;top:399.83px" class="cls_008"><span class="cls_008">][0</span></div>
+<div style="position:absolute;left:187.60px;top:399.83px" class="cls_008"><span class="cls_008">][p3][0</span></div>
+<div style="position:absolute;left:227.79px;top:399.83px" class="cls_008"><span class="cls_008">]</span></div>
+<div style="position:absolute;left:106.37px;top:409.29px" class="cls_007"><span class="cls_007">10</span></div>
+<div style="position:absolute;left:125.37px;top:409.29px" class="cls_008"><span class="cls_008">// X4[0</span></div>
+<div style="position:absolute;left:167.03px;top:409.29px" class="cls_008"><span class="cls_008">][0</span></div>
+<div style="position:absolute;left:187.35px;top:409.29px" class="cls_008"><span class="cls_008">][0</span></div>
+<div style="position:absolute;left:207.92px;top:409.29px" class="cls_008"><span class="cls_008">][p4]</span></div>
+<div style="position:absolute;left:106.37px;top:418.76px" class="cls_007"><span class="cls_007">11</span></div>
+<div style="position:absolute;left:125.98px;top:418.76px" class="cls_009"><span class="cls_009">private</span><span class="cls_007">  Matrix[]  observationModel(){</span></div>
+<div style="position:absolute;left:106.37px;top:428.22px" class="cls_007"><span class="cls_007">12</span></div>
+<div style="position:absolute;left:135.69px;top:428.22px" class="cls_007"><span class="cls_007">Matrix [ ]  obs mod =</span><span class="cls_009"> new</span><span class="cls_007"> Matrix [COLORS. length ] ;</span></div>
+<div style="position:absolute;left:106.37px;top:437.69px" class="cls_007"><span class="cls_007">13</span></div>
+<div style="position:absolute;left:106.37px;top:447.15px" class="cls_007"><span class="cls_007">14</span></div>
+<div style="position:absolute;left:106.37px;top:456.62px" class="cls_007"><span class="cls_007">15</span></div>
+<div style="position:absolute;left:136.18px;top:456.62px" class="cls_009"><span class="cls_009">int</span><span class="cls_007">  index=0;</span></div>
+<div style="position:absolute;left:106.37px;top:466.08px" class="cls_007"><span class="cls_007">16</span></div>
+<div style="position:absolute;left:136.25px;top:466.08px" class="cls_009"><span class="cls_009">for</span></div>
+<div style="position:absolute;left:156.18px;top:466.08px" class="cls_007"><span class="cls_007">(</span><span class="cls_009">char</span><span class="cls_007">  color</span></div>
+<div style="position:absolute;left:217.62px;top:466.08px" class="cls_007"><span class="cls_007">: COLORS) {</span></div>
+<div style="position:absolute;left:106.37px;top:475.54px" class="cls_007"><span class="cls_007">17</span></div>
+<div style="position:absolute;left:145.99px;top:475.54px" class="cls_009"><span class="cls_009">double</span><span class="cls_007"> [][]  obs matrix</span></div>
+<div style="position:absolute;left:256.16px;top:475.54px" class="cls_007"><span class="cls_007">=</span><span class="cls_009"> new  double</span><span class="cls_007"> [ variables . length ] [ ] ;</span></div>
+<div style="position:absolute;left:106.37px;top:485.01px" class="cls_007"><span class="cls_007">18</span></div>
+<div style="position:absolute;left:146.35px;top:485.01px" class="cls_009"><span class="cls_009">int</span><span class="cls_007">  i=0;</span></div>
+<div style="position:absolute;left:106.37px;top:494.47px" class="cls_007"><span class="cls_007">19</span></div>
+<div style="position:absolute;left:146.41px;top:494.47px" class="cls_009"><span class="cls_009">for</span></div>
+<div style="position:absolute;left:166.34px;top:494.47px" class="cls_007"><span class="cls_007">(</span><span class="cls_009">int</span><span class="cls_007">  variable:variables){</span></div>
+<div style="position:absolute;left:106.37px;top:503.94px" class="cls_007"><span class="cls_007">20</span></div>
+<div style="position:absolute;left:106.37px;top:513.40px" class="cls_007"><span class="cls_007">21</span></div>
+<div style="position:absolute;left:156.27px;top:513.40px" class="cls_007"><span class="cls_007">obs matrix[ i ]</span></div>
+<div style="position:absolute;left:225.67px;top:513.40px" class="cls_007"><span class="cls_007">=</span><span class="cls_009"> new  double</span><span class="cls_007"> [ variables . length ] ;</span></div>
+<div style="position:absolute;left:389.58px;top:513.40px" class="cls_008"><span class="cls_008">//create</span></div>
+<div style="position:absolute;left:435.16px;top:513.40px" class="cls_008"><span class="cls_008">an</span></div>
+<div style="position:absolute;left:176.19px;top:522.87px" class="cls_008"><span class="cls_008">array  full  of</span></div>
+<div style="position:absolute;left:246.77px;top:522.87px" class="cls_008"><span class="cls_008">0s</span></div>
+<div style="position:absolute;left:106.37px;top:532.33px" class="cls_007"><span class="cls_007">22</span></div>
+<div style="position:absolute;left:106.37px;top:541.80px" class="cls_007"><span class="cls_007">23</span></div>
+<div style="position:absolute;left:155.85px;top:541.80px" class="cls_008"><span class="cls_008">//if  its  a  true  reading</span></div>
+<div style="position:absolute;left:106.37px;top:551.26px" class="cls_007"><span class="cls_007">24</span></div>
+<div style="position:absolute;left:157.03px;top:551.26px" class="cls_009"><span class="cls_009">if</span></div>
+<div style="position:absolute;left:171.43px;top:551.26px" class="cls_007"><span class="cls_007">(maze . getChar ( variable )</span></div>
+<div style="position:absolute;left:291.47px;top:551.26px" class="cls_007"><span class="cls_007">==  c o l o r ) {</span></div>
+<div style="position:absolute;left:106.37px;top:560.73px" class="cls_007"><span class="cls_007">25</span></div>
+<div style="position:absolute;left:166.43px;top:560.73px" class="cls_007"><span class="cls_007">obs matrix[ i ][ i ]</span></div>
+<div style="position:absolute;left:251.08px;top:560.73px" class="cls_007"><span class="cls_007">= 1 − error rate ;</span></div>
+<div style="position:absolute;left:106.37px;top:570.19px" class="cls_007"><span class="cls_007">26</span></div>
+<div style="position:absolute;left:155.71px;top:570.19px" class="cls_007"><span class="cls_007">}</span></div>
+<div style="position:absolute;left:106.37px;top:579.65px" class="cls_007"><span class="cls_007">27</span></div>
+<div style="position:absolute;left:106.37px;top:589.12px" class="cls_007"><span class="cls_007">28</span></div>
+<div style="position:absolute;left:155.85px;top:589.12px" class="cls_008"><span class="cls_008">//if  its  an  error</span></div>
+<div style="position:absolute;left:106.37px;top:598.58px" class="cls_007"><span class="cls_007">29</span></div>
+<div style="position:absolute;left:156.71px;top:598.58px" class="cls_009"><span class="cls_009">else</span><span class="cls_007">{</span></div>
+<div style="position:absolute;left:106.37px;top:608.05px" class="cls_007"><span class="cls_007">30</span></div>
+<div style="position:absolute;left:166.43px;top:608.05px" class="cls_007"><span class="cls_007">obs matrix[ i ][ i ]</span></div>
+<div style="position:absolute;left:251.08px;top:608.05px" class="cls_007"><span class="cls_007">= error rate /(COLORS. length −1) ;</span></div>
+<div style="position:absolute;left:106.37px;top:617.51px" class="cls_007"><span class="cls_007">31</span></div>
+<div style="position:absolute;left:155.71px;top:617.51px" class="cls_007"><span class="cls_007">}</span></div>
+<div style="position:absolute;left:106.37px;top:626.98px" class="cls_007"><span class="cls_007">32</span></div>
+<div style="position:absolute;left:156.65px;top:626.98px" class="cls_007"><span class="cls_007">i ++;</span></div>
+<div style="position:absolute;left:106.37px;top:636.44px" class="cls_007"><span class="cls_007">33</span></div>
+<div style="position:absolute;left:106.37px;top:645.91px" class="cls_007"><span class="cls_007">34</span></div>
+<div style="position:absolute;left:145.55px;top:645.91px" class="cls_007"><span class="cls_007">}</span></div>
+<div style="position:absolute;left:106.37px;top:655.37px" class="cls_007"><span class="cls_007">35</span></div>
+<div style="position:absolute;left:145.66px;top:655.37px" class="cls_007"><span class="cls_007">obs mod[index]</span></div>
+<div style="position:absolute;left:220.59px;top:655.37px" class="cls_007"><span class="cls_007">=</span><span class="cls_009"> new</span><span class="cls_007">  Basic2DMatrix ( obs matrix ) ;</span></div>
+<div style="position:absolute;left:106.37px;top:664.83px" class="cls_007"><span class="cls_007">36</span></div>
+<div style="position:absolute;left:146.03px;top:664.83px" class="cls_007"><span class="cls_007">index++;</span></div>
+<div style="position:absolute;left:106.37px;top:674.30px" class="cls_007"><span class="cls_007">37</span></div>
+<div style="position:absolute;left:135.39px;top:674.30px" class="cls_007"><span class="cls_007">}</span></div>
+<div style="position:absolute;left:106.37px;top:683.76px" class="cls_007"><span class="cls_007">38</span></div>
+<div style="position:absolute;left:136.02px;top:683.76px" class="cls_009"><span class="cls_009">return</span><span class="cls_007">  obs mod;</span></div>
+<div style="position:absolute;left:106.37px;top:693.23px" class="cls_007"><span class="cls_007">39</span></div>
+<div style="position:absolute;left:125.22px;top:693.23px" class="cls_007"><span class="cls_007">}</span></div>
+<div style="position:absolute;left:294.17px;top:740.60px" class="cls_005"><span class="cls_005">4</span></div>
+</div>
+<div style="position:absolute;left:50%;margin-left:-297px;top:3404px;width:595px;height:841px;border-style:outset;overflow:hidden">
+<div style="position:absolute;left:0px;top:0px">
+<img src="image_src/background05.jpg" width=595 height=841></div>
+<div style="position:absolute;left:124.80px;top:122.92px" class="cls_003"><span class="cls_003">2.4</span></div>
+<div style="position:absolute;left:155.44px;top:122.92px" class="cls_003"><span class="cls_003">Sensor Robot Representation</span></div>
+<div style="position:absolute;left:124.80px;top:143.30px" class="cls_005"><span class="cls_005">SensorRobot.java extends the abstract class ProbabilisticReasoningAgent.java.</span></div>
+<div style="position:absolute;left:124.80px;top:155.25px" class="cls_005"><span class="cls_005">The state is represented within ProbabilisticReasoningAgent.java as an Ar-</span></div>
+<div style="position:absolute;left:124.80px;top:167.21px" class="cls_005"><span class="cls_005">rayList of Vectors of length S, where each index is the beliefstate at time t,</span></div>
+<div style="position:absolute;left:124.80px;top:179.16px" class="cls_005"><span class="cls_005">S is the number of state variables and each entry is the probability of being at</span></div>
+<div style="position:absolute;left:124.80px;top:191.12px" class="cls_005"><span class="cls_005">a particular location.</span></div>
+<div style="position:absolute;left:139.75px;top:203.07px" class="cls_005"><span class="cls_005">ProbabilistingReasoningAgent.java:</span></div>
+<div style="position:absolute;left:110.61px;top:220.51px" class="cls_007"><span class="cls_007">1</span></div>
+<div style="position:absolute;left:125.37px;top:220.51px" class="cls_008"><span class="cls_008">//transition  and  observation  models  are  represented  as a  lists  of</span></div>
+<div style="position:absolute;left:145.68px;top:229.97px" class="cls_008"><span class="cls_008">matrices ,  which  are  instantiated  in  concrete  classes</span></div>
+<div style="position:absolute;left:110.61px;top:239.44px" class="cls_007"><span class="cls_007">2</span></div>
+<div style="position:absolute;left:110.61px;top:248.90px" class="cls_007"><span class="cls_007">3</span></div>
+<div style="position:absolute;left:136.14px;top:248.90px" class="cls_009"><span class="cls_009">private</span><span class="cls_007">  Matrix  transition model;</span></div>
+<div style="position:absolute;left:303.20px;top:248.90px" class="cls_008"><span class="cls_008">//#v a r i a b l e s  x #v a r i a b l e s</span></div>
+<div style="position:absolute;left:110.61px;top:258.37px" class="cls_007"><span class="cls_007">4</span></div>
+<div style="position:absolute;left:136.14px;top:258.37px" class="cls_009"><span class="cls_009">private</span><span class="cls_007">  Matrix[]  observation model;</span></div>
+<div style="position:absolute;left:318.45px;top:258.37px" class="cls_008"><span class="cls_008">//list  of  diagonal  matrices</span></div>
+<div style="position:absolute;left:155.66px;top:267.83px" class="cls_008"><span class="cls_008">each  matrix  corresponds  to an  observation  model  for  a</span></div>
+<div style="position:absolute;left:156.21px;top:277.29px" class="cls_008"><span class="cls_008">particular  observation  value</span></div>
+<div style="position:absolute;left:301.25px;top:277.29px" class="cls_008"><span class="cls_008">#v a r s  x #v a r s</span></div>
+<div style="position:absolute;left:110.61px;top:286.76px" class="cls_007"><span class="cls_007">5</span></div>
+<div style="position:absolute;left:110.61px;top:296.22px" class="cls_007"><span class="cls_007">6</span></div>
+<div style="position:absolute;left:136.10px;top:296.22px" class="cls_009"><span class="cls_009">public</span><span class="cls_007">  ArrayList&lt;Vector> state ;</span></div>
+<div style="position:absolute;left:298.12px;top:296.22px" class="cls_008"><span class="cls_008">//probability  distribution  of</span></div>
+<div style="position:absolute;left:156.14px;top:305.69px" class="cls_008"><span class="cls_008">state  variables  over  time</span></div>
+<div style="position:absolute;left:139.75px;top:321.63px" class="cls_005"><span class="cls_005">SensorRobot contains representations of other useful bits of information in</span></div>
+<div style="position:absolute;left:124.80px;top:333.58px" class="cls_005"><span class="cls_005">addition to beliefstate.  It stores a char array of possible observation values.</span></div>
+<div style="position:absolute;left:124.80px;top:345.54px" class="cls_005"><span class="cls_005">Since, ProbablisticReasoningAgent represents variables as ints, we pass the value</span></div>
+<div style="position:absolute;left:124.80px;top:357.49px" class="cls_005"><span class="cls_005">of the color’s index to it. And it stores the error rate of the sensors.</span></div>
+<div style="position:absolute;left:139.75px;top:369.45px" class="cls_005"><span class="cls_005">In addition to the above mentioned transition and observation model builders,</span></div>
+<div style="position:absolute;left:124.80px;top:381.41px" class="cls_005"><span class="cls_005">SensorRobot contains generateRandomMoves(int num) and generateObserva-</span></div>
+<div style="position:absolute;left:124.80px;top:393.36px" class="cls_005"><span class="cls_005">tions(int[][] path, boolean toErrr). generateObservations returns a sequence of</span></div>
+<div style="position:absolute;left:124.80px;top:405.32px" class="cls_005"><span class="cls_005">observations which may or may not contain errors proportional to the error rate</span></div>
+<div style="position:absolute;left:124.80px;top:417.27px" class="cls_005"><span class="cls_005">depending on whether boolean toErrr is triggered.</span></div>
+<div style="position:absolute;left:139.75px;top:429.23px" class="cls_005"><span class="cls_005">SensorRobot.java</span></div>
+<div style="position:absolute;left:110.61px;top:446.66px" class="cls_007"><span class="cls_007">1</span></div>
+<div style="position:absolute;left:125.37px;top:446.66px" class="cls_008"><span class="cls_008">//the  set  of  robot moves</span></div>
+<div style="position:absolute;left:110.61px;top:456.12px" class="cls_007"><span class="cls_007">2</span></div>
+<div style="position:absolute;left:125.98px;top:456.12px" class="cls_009"><span class="cls_009">private  static  int</span><span class="cls_007"> [ ] [ ] MOVES =</span></div>
+<div style="position:absolute;left:283.21px;top:456.12px" class="cls_007"><span class="cls_007">{{1,0},{0,1},{−1,0},{0,−1}};</span></div>
+<div style="position:absolute;left:110.61px;top:465.59px" class="cls_007"><span class="cls_007">3</span></div>
+<div style="position:absolute;left:110.61px;top:475.05px" class="cls_007"><span class="cls_007">4</span></div>
+<div style="position:absolute;left:125.37px;top:475.05px" class="cls_008"><span class="cls_008">//the  set  of  possible  colors</span></div>
+<div style="position:absolute;left:110.61px;top:484.52px" class="cls_007"><span class="cls_007">5</span></div>
+<div style="position:absolute;left:125.98px;top:484.52px" class="cls_009"><span class="cls_009">private  final  char</span><span class="cls_007"> [ ] COLORS = { </span><span class="cls_010">’ r ’</span><span class="cls_007"> ,</span></div>
+<div style="position:absolute;left:309.54px;top:484.52px" class="cls_010"><span class="cls_010">’g’</span><span class="cls_007"> ,</span></div>
+<div style="position:absolute;left:334.94px;top:484.52px" class="cls_010"><span class="cls_010">’b’</span><span class="cls_007"> ,</span></div>
+<div style="position:absolute;left:360.35px;top:484.52px" class="cls_010"><span class="cls_010">’y’</span><span class="cls_007">};</span></div>
+<div style="position:absolute;left:110.61px;top:493.98px" class="cls_007"><span class="cls_007">6</span></div>
+<div style="position:absolute;left:110.61px;top:503.45px" class="cls_007"><span class="cls_007">7</span></div>
+<div style="position:absolute;left:125.37px;top:503.45px" class="cls_008"><span class="cls_008">//the max numbers  of  neighbors  per  location</span></div>
+<div style="position:absolute;left:110.61px;top:512.91px" class="cls_007"><span class="cls_007">8</span></div>
+<div style="position:absolute;left:125.98px;top:512.91px" class="cls_009"><span class="cls_009">private  final  double</span><span class="cls_007"> NUM NEIGHBORS = 4;</span></div>
+<div style="position:absolute;left:110.61px;top:522.38px" class="cls_007"><span class="cls_007">9</span></div>
+<div style="position:absolute;left:106.37px;top:531.84px" class="cls_007"><span class="cls_007">10</span></div>
+<div style="position:absolute;left:125.37px;top:531.84px" class="cls_008"><span class="cls_008">//the  sensor  error  rate</span></div>
+<div style="position:absolute;left:106.37px;top:541.30px" class="cls_007"><span class="cls_007">11</span></div>
+<div style="position:absolute;left:125.98px;top:541.30px" class="cls_009"><span class="cls_009">private  double</span><span class="cls_007">  error rate ;</span></div>
+<div style="position:absolute;left:106.37px;top:550.77px" class="cls_007"><span class="cls_007">12</span></div>
+<div style="position:absolute;left:106.37px;top:560.23px" class="cls_007"><span class="cls_007">13</span></div>
+<div style="position:absolute;left:125.98px;top:560.23px" class="cls_009"><span class="cls_009">private</span><span class="cls_007"> Maze maze;</span></div>
+<div style="position:absolute;left:221.91px;top:560.23px" class="cls_008"><span class="cls_008">//the  robot knows the  layout  of  the maze</span></div>
+<div style="position:absolute;left:106.37px;top:569.70px" class="cls_007"><span class="cls_007">14</span></div>
+<div style="position:absolute;left:106.37px;top:579.16px" class="cls_007"><span class="cls_007">15</span></div>
+<div style="position:absolute;left:125.93px;top:579.16px" class="cls_009"><span class="cls_009">public  int</span><span class="cls_007"> []  variables;</span></div>
+<div style="position:absolute;left:247.32px;top:579.16px" class="cls_008"><span class="cls_008">//the  list  of  variables  and  their  locations</span></div>
+<div style="position:absolute;left:150.84px;top:588.63px" class="cls_008"><span class="cls_008">in  the maze</span></div>
+<div style="position:absolute;left:106.37px;top:598.09px" class="cls_007"><span class="cls_007">16</span></div>
+<div style="position:absolute;left:106.37px;top:607.56px" class="cls_007"><span class="cls_007">17</span></div>
+<div style="position:absolute;left:125.37px;top:607.56px" class="cls_008"><span class="cls_008">// construct  the HMM based  off  the maze</span></div>
+<div style="position:absolute;left:106.37px;top:617.02px" class="cls_007"><span class="cls_007">18</span></div>
+<div style="position:absolute;left:125.93px;top:617.02px" class="cls_009"><span class="cls_009">public</span><span class="cls_007">  SensorRobot (Maze m){</span></div>
+<div style="position:absolute;left:106.37px;top:626.49px" class="cls_007"><span class="cls_007">19</span></div>
+<div style="position:absolute;left:106.37px;top:635.95px" class="cls_007"><span class="cls_007">20</span></div>
+<div style="position:absolute;left:135.27px;top:635.95px" class="cls_007"><span class="cls_007">maze = m;</span></div>
+<div style="position:absolute;left:106.37px;top:645.41px" class="cls_007"><span class="cls_007">21</span></div>
+<div style="position:absolute;left:106.37px;top:654.88px" class="cls_007"><span class="cls_007">22</span></div>
+<div style="position:absolute;left:136.35px;top:654.88px" class="cls_007"><span class="cls_007">error rate</span></div>
+<div style="position:absolute;left:190.10px;top:654.88px" class="cls_007"><span class="cls_007">= .12;</span></div>
+<div style="position:absolute;left:106.37px;top:664.34px" class="cls_007"><span class="cls_007">23</span></div>
+<div style="position:absolute;left:106.37px;top:673.81px" class="cls_007"><span class="cls_007">24</span></div>
+<div style="position:absolute;left:135.53px;top:673.81px" class="cls_008"><span class="cls_008">//Construct  the  models from  the maze</span></div>
+<div style="position:absolute;left:106.37px;top:683.27px" class="cls_007"><span class="cls_007">25</span></div>
+<div style="position:absolute;left:136.19px;top:683.27px" class="cls_007"><span class="cls_007">setVariables();</span></div>
+<div style="position:absolute;left:106.37px;top:692.74px" class="cls_007"><span class="cls_007">26</span></div>
+<div style="position:absolute;left:135.73px;top:692.74px" class="cls_007"><span class="cls_007">setT(transitionModel());</span></div>
+<div style="position:absolute;left:106.37px;top:702.20px" class="cls_007"><span class="cls_007">27</span></div>
+<div style="position:absolute;left:135.63px;top:702.20px" class="cls_007"><span class="cls_007">setO(observationModel());</span></div>
+<div style="position:absolute;left:106.37px;top:711.67px" class="cls_007"><span class="cls_007">28</span></div>
+<div style="position:absolute;left:136.18px;top:711.67px" class="cls_007"><span class="cls_007">setState(variables.length);</span></div>
+<div style="position:absolute;left:294.17px;top:740.60px" class="cls_005"><span class="cls_005">5</span></div>
+</div>
+<div style="position:absolute;left:50%;margin-left:-297px;top:4255px;width:595px;height:841px;border-style:outset;overflow:hidden">
+<div style="position:absolute;left:0px;top:0px">
+<img src="image_src/background06.jpg" width=595 height=841></div>
+<div style="position:absolute;left:106.37px;top:126.90px" class="cls_007"><span class="cls_007">29</span></div>
+<div style="position:absolute;left:125.22px;top:126.90px" class="cls_007"><span class="cls_007">}</span></div>
+<div style="position:absolute;left:106.37px;top:136.37px" class="cls_007"><span class="cls_007">30</span></div>
+<div style="position:absolute;left:106.37px;top:145.83px" class="cls_007"><span class="cls_007">31</span></div>
+<div style="position:absolute;left:125.37px;top:145.83px" class="cls_008"><span class="cls_008">//Generate a random  set  of  moves −− a  l i s t  of  coordinates</span></div>
+<div style="position:absolute;left:106.37px;top:155.29px" class="cls_007"><span class="cls_007">32</span></div>
+<div style="position:absolute;left:125.93px;top:155.29px" class="cls_009"><span class="cls_009">public  int</span><span class="cls_007"> [ ] [ ]  generateRandomMoves( </span><span class="cls_009">int</span><span class="cls_007"> num){</span></div>
+<div style="position:absolute;left:106.37px;top:164.76px" class="cls_007"><span class="cls_007">33</span></div>
+<div style="position:absolute;left:134.87px;top:164.76px" class="cls_007"><span class="cls_007">Random  random  =</span><span class="cls_009">  new</span><span class="cls_007">  Random ( ) ;</span></div>
+<div style="position:absolute;left:106.37px;top:174.22px" class="cls_007"><span class="cls_007">34</span></div>
+<div style="position:absolute;left:106.37px;top:183.69px" class="cls_007"><span class="cls_007">35</span></div>
+<div style="position:absolute;left:136.18px;top:183.69px" class="cls_009"><span class="cls_009">int</span><span class="cls_007"> [][]  path</span></div>
+<div style="position:absolute;left:200.26px;top:183.69px" class="cls_007"><span class="cls_007">=</span><span class="cls_009"> new  int</span><span class="cls_007"> [num ] [ ] ;</span></div>
+<div style="position:absolute;left:106.37px;top:193.15px" class="cls_007"><span class="cls_007">36</span></div>
+<div style="position:absolute;left:106.37px;top:202.62px" class="cls_007"><span class="cls_007">37</span></div>
+<div style="position:absolute;left:136.18px;top:202.62px" class="cls_009"><span class="cls_009">int</span><span class="cls_007">  var</span></div>
+<div style="position:absolute;left:174.86px;top:202.62px" class="cls_007"><span class="cls_007">= variables[random.nextInt(variables.length) ];</span></div>
+<div style="position:absolute;left:106.37px;top:212.08px" class="cls_007"><span class="cls_007">38</span></div>
+<div style="position:absolute;left:135.64px;top:212.08px" class="cls_007"><span class="cls_007">path[0]</span></div>
+<div style="position:absolute;left:174.86px;top:212.08px" class="cls_007"><span class="cls_007">=</span><span class="cls_009"> new  int</span><span class="cls_007"> [ ] { var%maze . width ,  var/maze . width };</span></div>
+<div style="position:absolute;left:106.37px;top:221.55px" class="cls_007"><span class="cls_007">39</span></div>
+<div style="position:absolute;left:106.37px;top:231.01px" class="cls_007"><span class="cls_007">40</span></div>
+<div style="position:absolute;left:136.25px;top:231.01px" class="cls_009"><span class="cls_009">for</span></div>
+<div style="position:absolute;left:156.18px;top:231.01px" class="cls_007"><span class="cls_007">( </span><span class="cls_009">int</span><span class="cls_007">  i =1;  i&lt; num;  i++){</span></div>
+<div style="position:absolute;left:106.37px;top:240.47px" class="cls_007"><span class="cls_007">41</span></div>
+<div style="position:absolute;left:146.35px;top:240.47px" class="cls_009"><span class="cls_009">int</span><span class="cls_007"> [ ]  move = MOVES[ random . nextInt (MOVES. length ) ] ;</span></div>
+<div style="position:absolute;left:106.37px;top:249.94px" class="cls_007"><span class="cls_007">42</span></div>
+<div style="position:absolute;left:146.35px;top:249.94px" class="cls_009"><span class="cls_009">int</span><span class="cls_007">  newx = path[i −1][0]</span></div>
+<div style="position:absolute;left:266.32px;top:249.94px" class="cls_007"><span class="cls_007">+ move [ 0 ] ;</span></div>
+<div style="position:absolute;left:106.37px;top:259.40px" class="cls_007"><span class="cls_007">43</span></div>
+<div style="position:absolute;left:146.35px;top:259.40px" class="cls_009"><span class="cls_009">int</span><span class="cls_007">  newy = path[i −1][1]</span></div>
+<div style="position:absolute;left:266.32px;top:259.40px" class="cls_007"><span class="cls_007">+ move [ 1 ] ;</span></div>
+<div style="position:absolute;left:106.37px;top:268.87px" class="cls_007"><span class="cls_007">44</span></div>
+<div style="position:absolute;left:146.86px;top:268.87px" class="cls_009"><span class="cls_009">if</span><span class="cls_007">(maze.isLegal(newx,  newy)){</span></div>
+<div style="position:absolute;left:106.37px;top:278.33px" class="cls_007"><span class="cls_007">45</span></div>
+<div style="position:absolute;left:155.97px;top:278.33px" class="cls_007"><span class="cls_007">path[ i ]</span></div>
+<div style="position:absolute;left:195.18px;top:278.33px" class="cls_007"><span class="cls_007">=</span><span class="cls_009"> new  int</span><span class="cls_007"> [ ] { newx ,  newy };</span></div>
+<div style="position:absolute;left:106.37px;top:287.80px" class="cls_007"><span class="cls_007">46</span></div>
+<div style="position:absolute;left:145.55px;top:287.80px" class="cls_007"><span class="cls_007">}</span></div>
+<div style="position:absolute;left:106.37px;top:297.26px" class="cls_007"><span class="cls_007">47</span></div>
+<div style="position:absolute;left:146.55px;top:297.26px" class="cls_009"><span class="cls_009">else</span><span class="cls_007">{</span></div>
+<div style="position:absolute;left:106.37px;top:306.73px" class="cls_007"><span class="cls_007">48</span></div>
+<div style="position:absolute;left:155.97px;top:306.73px" class="cls_007"><span class="cls_007">path[ i ]</span></div>
+<div style="position:absolute;left:195.18px;top:306.73px" class="cls_007"><span class="cls_007">= path[i −1];</span></div>
+<div style="position:absolute;left:106.37px;top:316.19px" class="cls_007"><span class="cls_007">49</span></div>
+<div style="position:absolute;left:145.55px;top:316.19px" class="cls_007"><span class="cls_007">}</span></div>
+<div style="position:absolute;left:106.37px;top:325.66px" class="cls_007"><span class="cls_007">50</span></div>
+<div style="position:absolute;left:135.39px;top:325.66px" class="cls_007"><span class="cls_007">}</span></div>
+<div style="position:absolute;left:106.37px;top:335.12px" class="cls_007"><span class="cls_007">51</span></div>
+<div style="position:absolute;left:136.02px;top:335.12px" class="cls_009"><span class="cls_009">return</span><span class="cls_007">  path;</span></div>
+<div style="position:absolute;left:106.37px;top:344.58px" class="cls_007"><span class="cls_007">52</span></div>
+<div style="position:absolute;left:125.22px;top:344.58px" class="cls_007"><span class="cls_007">}</span></div>
+<div style="position:absolute;left:106.37px;top:354.05px" class="cls_007"><span class="cls_007">53</span></div>
+<div style="position:absolute;left:106.37px;top:363.51px" class="cls_007"><span class="cls_007">54</span></div>
+<div style="position:absolute;left:125.37px;top:363.51px" class="cls_008"><span class="cls_008">//from a robot  path,  generate  a  list  of  observations</span></div>
+<div style="position:absolute;left:106.37px;top:372.98px" class="cls_007"><span class="cls_007">55</span></div>
+<div style="position:absolute;left:125.37px;top:372.98px" class="cls_008"><span class="cls_008">//parameters:  boolean  errr .  if  true  the  sensor  will  err</span></div>
+<div style="position:absolute;left:106.37px;top:382.44px" class="cls_007"><span class="cls_007">56</span></div>
+<div style="position:absolute;left:125.93px;top:382.44px" class="cls_009"><span class="cls_009">public  int</span><span class="cls_007"> []  generateObservations(</span><span class="cls_009">int</span><span class="cls_007"> [][]  path,</span><span class="cls_009">  boolean</span></div>
+<div style="position:absolute;left:410.38px;top:382.44px" class="cls_007"><span class="cls_007">toErrr){</span></div>
+<div style="position:absolute;left:106.37px;top:391.91px" class="cls_007"><span class="cls_007">57</span></div>
+<div style="position:absolute;left:136.18px;top:391.91px" class="cls_009"><span class="cls_009">int</span><span class="cls_007"> []  observations</span></div>
+<div style="position:absolute;left:230.75px;top:391.91px" class="cls_007"><span class="cls_007">=</span><span class="cls_009"> new  int</span><span class="cls_007"> [ path . length ] ;</span></div>
+<div style="position:absolute;left:106.37px;top:401.37px" class="cls_007"><span class="cls_007">58</span></div>
+<div style="position:absolute;left:106.37px;top:410.84px" class="cls_007"><span class="cls_007">59</span></div>
+<div style="position:absolute;left:136.70px;top:410.84px" class="cls_009"><span class="cls_009">if</span></div>
+<div style="position:absolute;left:151.72px;top:410.84px" class="cls_007"><span class="cls_007">(!toErrr){</span></div>
+<div style="position:absolute;left:106.37px;top:420.30px" class="cls_007"><span class="cls_007">60</span></div>
+<div style="position:absolute;left:146.35px;top:420.30px" class="cls_009"><span class="cls_009">int</span><span class="cls_007">  i=0;</span></div>
+<div style="position:absolute;left:106.37px;top:429.76px" class="cls_007"><span class="cls_007">61</span></div>
+<div style="position:absolute;left:146.41px;top:429.76px" class="cls_009"><span class="cls_009">for</span></div>
+<div style="position:absolute;left:166.34px;top:429.76px" class="cls_007"><span class="cls_007">(</span><span class="cls_009">int</span><span class="cls_007"> []  location:path){</span></div>
+<div style="position:absolute;left:106.37px;top:439.23px" class="cls_007"><span class="cls_007">62</span></div>
+<div style="position:absolute;left:156.15px;top:439.23px" class="cls_009"><span class="cls_009">char</span><span class="cls_007">  c</span></div>
+<div style="position:absolute;left:190.10px;top:439.23px" class="cls_007"><span class="cls_007">= maze . getChar ( location [ 0 ] ,  location [ 1 ] ) ;</span></div>
+<div style="position:absolute;left:106.37px;top:448.69px" class="cls_007"><span class="cls_007">63</span></div>
+<div style="position:absolute;left:106.37px;top:458.16px" class="cls_007"><span class="cls_007">64</span></div>
+<div style="position:absolute;left:156.44px;top:458.16px" class="cls_007"><span class="cls_007">observations[ i ]</span></div>
+<div style="position:absolute;left:235.83px;top:458.16px" class="cls_007"><span class="cls_007">= getCharInt(c);</span></div>
+<div style="position:absolute;left:106.37px;top:467.62px" class="cls_007"><span class="cls_007">65</span></div>
+<div style="position:absolute;left:156.65px;top:467.62px" class="cls_007"><span class="cls_007">i ++;</span></div>
+<div style="position:absolute;left:106.37px;top:477.09px" class="cls_007"><span class="cls_007">66</span></div>
+<div style="position:absolute;left:145.55px;top:477.09px" class="cls_007"><span class="cls_007">}</span></div>
+<div style="position:absolute;left:106.37px;top:486.55px" class="cls_007"><span class="cls_007">67</span></div>
+<div style="position:absolute;left:146.19px;top:486.55px" class="cls_009"><span class="cls_009">return</span><span class="cls_007">  observations;</span></div>
+<div style="position:absolute;left:106.37px;top:496.02px" class="cls_007"><span class="cls_007">68</span></div>
+<div style="position:absolute;left:135.39px;top:496.02px" class="cls_007"><span class="cls_007">}</span></div>
+<div style="position:absolute;left:106.37px;top:505.48px" class="cls_007"><span class="cls_007">69</span></div>
+<div style="position:absolute;left:106.37px;top:514.95px" class="cls_007"><span class="cls_007">70</span></div>
+<div style="position:absolute;left:134.87px;top:514.95px" class="cls_007"><span class="cls_007">Random  random  =</span><span class="cls_009">  new</span><span class="cls_007">  Random ( ) ;</span></div>
+<div style="position:absolute;left:106.37px;top:524.41px" class="cls_007"><span class="cls_007">71</span></div>
+<div style="position:absolute;left:106.37px;top:533.87px" class="cls_007"><span class="cls_007">72</span></div>
+<div style="position:absolute;left:136.18px;top:533.87px" class="cls_009"><span class="cls_009">int</span><span class="cls_007">  i=0;</span></div>
+<div style="position:absolute;left:106.37px;top:543.34px" class="cls_007"><span class="cls_007">73</span></div>
+<div style="position:absolute;left:136.25px;top:543.34px" class="cls_009"><span class="cls_009">for</span></div>
+<div style="position:absolute;left:156.18px;top:543.34px" class="cls_007"><span class="cls_007">(</span><span class="cls_009">int</span><span class="cls_007"> []  location:path){</span></div>
+<div style="position:absolute;left:106.37px;top:552.80px" class="cls_007"><span class="cls_007">74</span></div>
+<div style="position:absolute;left:145.99px;top:552.80px" class="cls_009"><span class="cls_009">char</span><span class="cls_007">  c</span></div>
+<div style="position:absolute;left:179.94px;top:552.80px" class="cls_007"><span class="cls_007">= maze . getChar ( location [ 0 ] ,  location [ 1 ] ) ;</span></div>
+<div style="position:absolute;left:106.37px;top:562.27px" class="cls_007"><span class="cls_007">75</span></div>
+<div style="position:absolute;left:106.37px;top:571.73px" class="cls_007"><span class="cls_007">76</span></div>
+<div style="position:absolute;left:145.99px;top:571.73px" class="cls_009"><span class="cls_009">double</span><span class="cls_007">  error</span></div>
+<div style="position:absolute;left:210.43px;top:571.73px" class="cls_007"><span class="cls_007">= random . nextDouble () ;</span></div>
+<div style="position:absolute;left:106.37px;top:581.20px" class="cls_007"><span class="cls_007">77</span></div>
+<div style="position:absolute;left:145.68px;top:581.20px" class="cls_007"><span class="cls_007">System.out.println(error</span></div>
+<div style="position:absolute;left:271.40px;top:581.20px" class="cls_007"><span class="cls_007">+</span><span class="cls_010"> ” ”</span><span class="cls_007"> + error rate);</span></div>
+<div style="position:absolute;left:106.37px;top:590.66px" class="cls_007"><span class="cls_007">78</span></div>
+<div style="position:absolute;left:145.69px;top:590.66px" class="cls_008"><span class="cls_008">//get  the  correct  observation</span></div>
+<div style="position:absolute;left:106.37px;top:600.13px" class="cls_007"><span class="cls_007">79</span></div>
+<div style="position:absolute;left:146.35px;top:600.13px" class="cls_009"><span class="cls_009">int</span><span class="cls_007">  charval</span></div>
+<div style="position:absolute;left:205.35px;top:600.13px" class="cls_007"><span class="cls_007">= getCharInt(c);</span></div>
+<div style="position:absolute;left:106.37px;top:609.59px" class="cls_007"><span class="cls_007">80</span></div>
+<div style="position:absolute;left:106.37px;top:619.06px" class="cls_007"><span class="cls_007">81</span></div>
+<div style="position:absolute;left:145.69px;top:619.06px" class="cls_008"><span class="cls_008">//Generate a random  error</span></div>
+<div style="position:absolute;left:106.37px;top:628.52px" class="cls_007"><span class="cls_007">82</span></div>
+<div style="position:absolute;left:146.86px;top:628.52px" class="cls_009"><span class="cls_009">if</span></div>
+<div style="position:absolute;left:161.26px;top:628.52px" class="cls_007"><span class="cls_007">(error</span></div>
+<div style="position:absolute;left:194.93px;top:628.52px" class="cls_007"><span class="cls_007">&lt; error rate){</span></div>
+<div style="position:absolute;left:106.37px;top:637.98px" class="cls_007"><span class="cls_007">83</span></div>
+<div style="position:absolute;left:156.51px;top:637.98px" class="cls_009"><span class="cls_009">int</span><span class="cls_007">  errorchar</span></div>
+<div style="position:absolute;left:225.67px;top:637.98px" class="cls_007"><span class="cls_007">= charval;</span></div>
+<div style="position:absolute;left:106.37px;top:647.45px" class="cls_007"><span class="cls_007">84</span></div>
+<div style="position:absolute;left:156.31px;top:647.45px" class="cls_009"><span class="cls_009">while</span></div>
+<div style="position:absolute;left:186.67px;top:647.45px" class="cls_007"><span class="cls_007">(errorchar</span></div>
+<div style="position:absolute;left:240.66px;top:647.45px" class="cls_007"><span class="cls_007">==  c h a r v a l ) {</span></div>
+<div style="position:absolute;left:106.37px;top:656.91px" class="cls_007"><span class="cls_007">85</span></div>
+<div style="position:absolute;left:166.63px;top:656.91px" class="cls_007"><span class="cls_007">errorchar</span></div>
+<div style="position:absolute;left:215.51px;top:656.91px" class="cls_007"><span class="cls_007">= random . nextInt (COLORS. length −1) ;</span></div>
+<div style="position:absolute;left:106.37px;top:666.38px" class="cls_007"><span class="cls_007">86</span></div>
+<div style="position:absolute;left:155.71px;top:666.38px" class="cls_007"><span class="cls_007">}</span></div>
+<div style="position:absolute;left:106.37px;top:675.84px" class="cls_007"><span class="cls_007">87</span></div>
+<div style="position:absolute;left:156.44px;top:675.84px" class="cls_007"><span class="cls_007">observations[ i ]</span></div>
+<div style="position:absolute;left:235.83px;top:675.84px" class="cls_007"><span class="cls_007">= errorchar;</span></div>
+<div style="position:absolute;left:106.37px;top:685.31px" class="cls_007"><span class="cls_007">88</span></div>
+<div style="position:absolute;left:145.55px;top:685.31px" class="cls_007"><span class="cls_007">}</span></div>
+<div style="position:absolute;left:106.37px;top:694.77px" class="cls_007"><span class="cls_007">89</span></div>
+<div style="position:absolute;left:146.55px;top:694.77px" class="cls_009"><span class="cls_009">else</span><span class="cls_007">{</span></div>
+<div style="position:absolute;left:106.37px;top:704.24px" class="cls_007"><span class="cls_007">90</span></div>
+<div style="position:absolute;left:156.44px;top:704.24px" class="cls_007"><span class="cls_007">observations[ i ]</span></div>
+<div style="position:absolute;left:235.83px;top:704.24px" class="cls_007"><span class="cls_007">= charval;</span></div>
+<div style="position:absolute;left:294.17px;top:740.60px" class="cls_005"><span class="cls_005">6</span></div>
+</div>
+<div style="position:absolute;left:50%;margin-left:-297px;top:5106px;width:595px;height:841px;border-style:outset;overflow:hidden">
+<div style="position:absolute;left:0px;top:0px">
+<img src="image_src/background07.jpg" width=595 height=841></div>
+<div style="position:absolute;left:106.37px;top:126.90px" class="cls_007"><span class="cls_007">91</span></div>
+<div style="position:absolute;left:145.55px;top:126.90px" class="cls_007"><span class="cls_007">}</span></div>
+<div style="position:absolute;left:106.37px;top:136.37px" class="cls_007"><span class="cls_007">92</span></div>
+<div style="position:absolute;left:106.37px;top:145.83px" class="cls_007"><span class="cls_007">93</span></div>
+<div style="position:absolute;left:106.37px;top:155.29px" class="cls_007"><span class="cls_007">94</span></div>
+<div style="position:absolute;left:146.49px;top:155.29px" class="cls_007"><span class="cls_007">i ++;</span></div>
+<div style="position:absolute;left:106.37px;top:164.76px" class="cls_007"><span class="cls_007">95</span></div>
+<div style="position:absolute;left:135.39px;top:164.76px" class="cls_007"><span class="cls_007">}</span></div>
+<div style="position:absolute;left:106.37px;top:174.22px" class="cls_007"><span class="cls_007">96</span></div>
+<div style="position:absolute;left:136.02px;top:174.22px" class="cls_009"><span class="cls_009">return</span><span class="cls_007">  observations;</span></div>
+<div style="position:absolute;left:106.37px;top:183.69px" class="cls_007"><span class="cls_007">97</span></div>
+<div style="position:absolute;left:125.22px;top:183.69px" class="cls_007"><span class="cls_007">}</span></div>
+<div style="position:absolute;left:124.80px;top:216.24px" class="cls_004"><span class="cls_004">3</span></div>
+<div style="position:absolute;left:149.01px;top:216.24px" class="cls_004"><span class="cls_004">Filtering</span></div>
+<div style="position:absolute;left:124.80px;top:242.44px" class="cls_005"><span class="cls_005">Filtering is the process of computing the belief state at the current time t, given</span></div>
+<div style="position:absolute;left:124.80px;top:254.40px" class="cls_005"><span class="cls_005">previous observations - that is computing expression (7). However, it is best to</span></div>
+<div style="position:absolute;left:124.80px;top:266.35px" class="cls_005"><span class="cls_005">look at filtering as a process of updating the belief state. This way, the filtering</span></div>
+<div style="position:absolute;left:124.80px;top:278.31px" class="cls_005"><span class="cls_005">algorithm needs not compute the belief state from 0:t every time the agent wants</span></div>
+<div style="position:absolute;left:124.80px;top:290.26px" class="cls_005"><span class="cls_005">to compute its current belief state, but rather build off previous calculations.</span></div>
+<div style="position:absolute;left:124.80px;top:302.22px" class="cls_005"><span class="cls_005">Thus we rewite expression (7) as a function of an updating filtering algorithm:</span></div>
+<div style="position:absolute;left:207.10px;top:326.13px" class="cls_005"><span class="cls_005">P (X</span><span class="cls_006"><sub>t+1</sub></span><span class="cls_005">|e1 : t + 1) = f (e</span><span class="cls_006"><sub>1:t+1</sub></span><span class="cls_005">, P (X</span><span class="cls_006"><sub>t</sub></span><span class="cls_005">|e</span><span class="cls_006"><sub>1:t</sub></span><span class="cls_005">))</span></div>
+<div style="position:absolute;left:450.80px;top:326.13px" class="cls_005"><span class="cls_005">(10)</span></div>
+<div style="position:absolute;left:124.80px;top:352.02px" class="cls_003"><span class="cls_003">3.1</span></div>
+<div style="position:absolute;left:155.44px;top:352.02px" class="cls_003"><span class="cls_003">Forward Algorithm</span></div>
+<div style="position:absolute;left:124.80px;top:372.40px" class="cls_005"><span class="cls_005">The Forward algorithm can be seen as a recursive algorithm which teases the</span></div>
+<div style="position:absolute;left:124.80px;top:384.36px" class="cls_005"><span class="cls_005">P (X</span><span class="cls_006"><sub>t+1</sub></span><span class="cls_005">|e1 : t + 1) into something calculatable, by eumerating it into a set of</span></div>
+<div style="position:absolute;left:124.80px;top:396.31px" class="cls_005"><span class="cls_005">expressions defined by the models T and O.</span></div>
+<div style="position:absolute;left:129.78px;top:417.58px" class="cls_005"><span class="cls_005">P (X</span><span class="cls_006"><sub>t+1</sub></span><span class="cls_005">|e</span><span class="cls_006"><sub>1:t+1</sub></span><span class="cls_005">) = P (X</span><span class="cls_006"><sub>t+1</sub></span><span class="cls_005">|e</span><span class="cls_006"><sub>1:t</sub></span><span class="cls_005">, e</span><span class="cls_006"><sub>t+1</sub></span><span class="cls_005">)(splittingtheterm)</span></div>
+<div style="position:absolute;left:197.16px;top:429.53px" class="cls_005"><span class="cls_005">= αP(e</span><span class="cls_006"><sub>t+1</sub></span><span class="cls_005">|Xt + 1,e</span><span class="cls_006"><sub>1:t</sub></span><span class="cls_005">)P(X</span><span class="cls_006"><sub>t+1</sub></span><span class="cls_005">|et + 1)(Bayes)</span></div>
+<div style="position:absolute;left:197.16px;top:441.49px" class="cls_005"><span class="cls_005">= αP(e</span><span class="cls_006"><sub>t+1</sub></span><span class="cls_005">|Xt + 1)P(X</span><span class="cls_006"><sub>t+1</sub></span><span class="cls_005">|e1 : t)(MarkovAssum.)</span></div>
+<div style="position:absolute;left:282.06px;top:445.97px" class="cls_005"><span class="cls_005">∑</span></div>
+<div style="position:absolute;left:197.16px;top:453.44px" class="cls_005"><span class="cls_005">= αP(e</span><span class="cls_006"><sub>t+1</sub></span><span class="cls_005">|Xt + 1)</span></div>
+<div style="position:absolute;left:292.58px;top:453.44px" class="cls_006"><span class="cls_006">x</span><span class="cls_011">t</span><span class="cls_005"> P(X</span><span class="cls_006">t+1</span><span class="cls_005">|x</span><span class="cls_006">t</span><span class="cls_005">,e1:t)P(x</span><span class="cls_006">t</span><span class="cls_005">|e</span><span class="cls_006">1:t</span><span class="cls_005">)(JointProbability)</span></div>
+<div style="position:absolute;left:282.06px;top:457.93px" class="cls_005"><span class="cls_005">∑</span></div>
+<div style="position:absolute;left:197.16px;top:465.40px" class="cls_005"><span class="cls_005">= αP(e</span><span class="cls_006"><sub>t+1</sub></span><span class="cls_005">|Xt + 1)</span></div>
+<div style="position:absolute;left:292.58px;top:465.40px" class="cls_006"><span class="cls_006">x</span><span class="cls_011">t</span><span class="cls_005"> P(X</span><span class="cls_006">t+1</span><span class="cls_005">|x</span><span class="cls_006">t</span><span class="cls_005">)P(x</span><span class="cls_006">t</span><span class="cls_005">|e</span><span class="cls_006">1:t</span><span class="cls_005">)(MarkovAssum.)</span></div>
+<div style="position:absolute;left:450.80px;top:489.41px" class="cls_005"><span class="cls_005">(11)</span></div>
+<div style="position:absolute;left:124.80px;top:501.36px" class="cls_005"><span class="cls_005">The filtering expression has been enumerated from P (X</span><span class="cls_006"><sub>t+1</sub></span><span class="cls_005">|e</span><span class="cls_006"><sub>1:t+1</sub></span><span class="cls_005">) to several</span></div>
+<div style="position:absolute;left:124.80px;top:513.32px" class="cls_005"><span class="cls_005">terms held in the model (P (e</span><span class="cls_006"><sub>t+1</sub></span><span class="cls_005">|Xt + 1) = O</span><span class="cls_006"><sub>i</sub></span><span class="cls_005">  and P (X</span><span class="cls_006"><sub>t+1</sub></span><span class="cls_005">|x</span><span class="cls_006"><sub>t</sub></span><span class="cls_005">) = T</span><span class="cls_006"><sub>ij</sub></span><span class="cls_005"> ) and α,</span></div>
+<div style="position:absolute;left:124.80px;top:525.28px" class="cls_005"><span class="cls_005">a normalizing constant.  As for P (x</span><span class="cls_006"><sub>t</sub></span><span class="cls_005">|e</span><span class="cls_006"><sub>1:t</sub></span><span class="cls_005">), which is not in the model, it is the</span></div>
+<div style="position:absolute;left:124.80px;top:537.23px" class="cls_005"><span class="cls_005">belief state at the previous time slice! If it is defined as f orward</span><span class="cls_006"><sub>1:t</sub></span><span class="cls_005">, the value</span></div>
+<div style="position:absolute;left:124.80px;top:549.19px" class="cls_005"><span class="cls_005">returned from a previous iteration, then filtering can be defined as a recursive</span></div>
+<div style="position:absolute;left:124.80px;top:561.14px" class="cls_005"><span class="cls_005">algorithm which computes the distribution over state variables from time 1 to</span></div>
+<div style="position:absolute;left:124.80px;top:573.10px" class="cls_005"><span class="cls_005">t. This is the Forward algorithm:</span></div>
+<div style="position:absolute;left:286.21px;top:596.91px" class="cls_005"><span class="cls_005">∑</span></div>
+<div style="position:absolute;left:140.54px;top:604.38px" class="cls_005"><span class="cls_005">f orward</span><span class="cls_006"><sub>1:t+1</sub></span><span class="cls_005"> = αP (e</span><span class="cls_006"><sub>t+1</sub></span><span class="cls_005">|Xt + 1)</span></div>
+<div style="position:absolute;left:296.72px;top:604.38px" class="cls_006"><span class="cls_006">x</span><span class="cls_011">t</span><span class="cls_005"> P(X</span><span class="cls_006">t+1</span><span class="cls_005">|x</span><span class="cls_006">t</span><span class="cls_005">)P(x</span><span class="cls_006">t</span><span class="cls_005">|e</span><span class="cls_006">1:t</span><span class="cls_005">)</span></div>
+<div style="position:absolute;left:201.30px;top:615.72px" class="cls_005"><span class="cls_005">= αO</span><span class="cls_006"><sub>t+1</sub></span><span class="cls_005">T</span><span class="cls_006"><sup>T</sup></span><span class="cls_005"> forward</span><span class="cls_006"><sub>1:t</sub></span><span class="cls_005">(matrixmultiplication)</span></div>
+<div style="position:absolute;left:450.80px;top:616.44px" class="cls_005"><span class="cls_005">(12)</span></div>
+<div style="position:absolute;left:201.30px;top:628.30px" class="cls_005"><span class="cls_005">= αFORWARD</span><span class="cls_006"><sub>1:t+1</sub></span><span class="cls_005">(forward</span><span class="cls_006"><sub>1:t</sub></span><span class="cls_005">,e</span><span class="cls_006"><sub>t+1</sub></span><span class="cls_005">)(substitution)</span></div>
+<div style="position:absolute;left:139.75px;top:649.77px" class="cls_005"><span class="cls_005">The Forward algorithm’s time complexity grows linearly with time. Since, it</span></div>
+<div style="position:absolute;left:124.80px;top:661.72px" class="cls_005"><span class="cls_005">only needs to keep track of the previous step it only requires constant space.//</span></div>
+<div style="position:absolute;left:139.75px;top:673.68px" class="cls_005"><span class="cls_005">In my implementation of the forward algorithm, I used matrices to represent</span></div>
+<div style="position:absolute;left:124.80px;top:685.63px" class="cls_005"><span class="cls_005">T and O.</span></div>
+<div style="position:absolute;left:110.61px;top:703.06px" class="cls_007"><span class="cls_007">1</span></div>
+<div style="position:absolute;left:294.17px;top:740.60px" class="cls_005"><span class="cls_005">7</span></div>
+</div>
+<div style="position:absolute;left:50%;margin-left:-297px;top:5957px;width:595px;height:841px;border-style:outset;overflow:hidden">
+<div style="position:absolute;left:0px;top:0px">
+<img src="image_src/background08.jpg" width=595 height=841></div>
+<div style="position:absolute;left:110.61px;top:126.90px" class="cls_007"><span class="cls_007">2</span></div>
+<div style="position:absolute;left:125.37px;top:126.90px" class="cls_008"><span class="cls_008">//Compute the  Belief  State  at  time  t: P(State</span></div>
+<div style="position:absolute;left:358.25px;top:126.90px" class="cls_008"><span class="cls_008">0:t|</span></div>
+<div style="position:absolute;left:145.72px;top:136.37px" class="cls_008"><span class="cls_008">sequenceOfObservations 1:t)</span></div>
+<div style="position:absolute;left:110.61px;top:145.83px" class="cls_007"><span class="cls_007">3</span></div>
+<div style="position:absolute;left:125.37px;top:145.83px" class="cls_008"><span class="cls_008">//</span></div>
+<div style="position:absolute;left:110.61px;top:155.29px" class="cls_007"><span class="cls_007">4</span></div>
+<div style="position:absolute;left:125.37px;top:155.29px" class="cls_008"><span class="cls_008">//returns  a sequence  of  belief  states  at  each  step  of  the</span></div>
+<div style="position:absolute;left:145.83px;top:164.76px" class="cls_008"><span class="cls_008">observation</span></div>
+<div style="position:absolute;left:110.61px;top:174.22px" class="cls_007"><span class="cls_007">5</span></div>
+<div style="position:absolute;left:125.37px;top:174.22px" class="cls_008"><span class="cls_008">//parameters:  int []  obs  is  the  sequence  of  observations</span></div>
+<div style="position:absolute;left:110.61px;top:183.69px" class="cls_007"><span class="cls_007">6</span></div>
+<div style="position:absolute;left:125.93px;top:183.69px" class="cls_009"><span class="cls_009">public</span><span class="cls_007">  ArrayList&lt;Vector> f i l t e r ( </span><span class="cls_009">int</span><span class="cls_007"> [ ]  obs ){</span></div>
+<div style="position:absolute;left:110.61px;top:193.15px" class="cls_007"><span class="cls_007">7</span></div>
+<div style="position:absolute;left:135.86px;top:193.15px" class="cls_007"><span class="cls_007">ArrayList&lt;Vector> forward vector</span></div>
+<div style="position:absolute;left:301.88px;top:193.15px" class="cls_007"><span class="cls_007">=</span><span class="cls_009"> new</span><span class="cls_007">  ArrayList&lt;Vector >() ;</span></div>
+<div style="position:absolute;left:110.61px;top:202.62px" class="cls_007"><span class="cls_007">8</span></div>
+<div style="position:absolute;left:136.08px;top:202.62px" class="cls_007"><span class="cls_007">forward vector.add(state.get(0));</span></div>
+<div style="position:absolute;left:110.61px;top:212.08px" class="cls_007"><span class="cls_007">9</span></div>
+<div style="position:absolute;left:136.02px;top:212.08px" class="cls_009"><span class="cls_009">return</span><span class="cls_007">  forward(forward vector.get(0) ,  obs,  forward vector ,</span></div>
+<div style="position:absolute;left:435.64px;top:212.08px" class="cls_007"><span class="cls_007">0,</span></div>
+<div style="position:absolute;left:156.41px;top:221.55px" class="cls_009"><span class="cls_009">false</span><span class="cls_007">);</span></div>
+<div style="position:absolute;left:106.37px;top:231.01px" class="cls_007"><span class="cls_007">10</span></div>
+<div style="position:absolute;left:125.22px;top:231.01px" class="cls_007"><span class="cls_007">}</span></div>
+<div style="position:absolute;left:106.37px;top:240.47px" class="cls_007"><span class="cls_007">11</span></div>
+<div style="position:absolute;left:106.37px;top:249.94px" class="cls_007"><span class="cls_007">12</span></div>
+<div style="position:absolute;left:125.98px;top:249.94px" class="cls_009"><span class="cls_009">private</span><span class="cls_007">  ArrayList&lt;Vector> forward ( Vector  prev forward ,</span><span class="cls_009">  int</span><span class="cls_007"> [ ]  obs ,</span></div>
+<div style="position:absolute;left:145.62px;top:259.40px" class="cls_007"><span class="cls_007">ArrayList&lt;Vector> state to t ,</span><span class="cls_009">  int</span><span class="cls_007">  t ,</span><span class="cls_009">  boolean</span><span class="cls_007">  isFB){</span></div>
+<div style="position:absolute;left:106.37px;top:268.87px" class="cls_007"><span class="cls_007">13</span></div>
+<div style="position:absolute;left:135.53px;top:268.87px" class="cls_008"><span class="cls_008">//Base Case</span></div>
+<div style="position:absolute;left:106.37px;top:278.33px" class="cls_007"><span class="cls_007">14</span></div>
+<div style="position:absolute;left:136.70px;top:278.33px" class="cls_009"><span class="cls_009">if</span></div>
+<div style="position:absolute;left:151.10px;top:278.33px" class="cls_007"><span class="cls_007">(t</span></div>
+<div style="position:absolute;left:163.95px;top:278.33px" class="cls_007"><span class="cls_007">>=  o b s . l e n g t h ) {</span></div>
+<div style="position:absolute;left:106.37px;top:287.80px" class="cls_007"><span class="cls_007">15</span></div>
+<div style="position:absolute;left:146.19px;top:287.80px" class="cls_009"><span class="cls_009">return</span><span class="cls_007">  state to t ;</span></div>
+<div style="position:absolute;left:106.37px;top:297.26px" class="cls_007"><span class="cls_007">16</span></div>
+<div style="position:absolute;left:135.39px;top:297.26px" class="cls_007"><span class="cls_007">}</span></div>
+<div style="position:absolute;left:106.37px;top:306.73px" class="cls_007"><span class="cls_007">17</span></div>
+<div style="position:absolute;left:106.37px;top:316.19px" class="cls_007"><span class="cls_007">18</span></div>
+<div style="position:absolute;left:135.53px;top:316.19px" class="cls_008"><span class="cls_008">//Recursive  Case</span></div>
+<div style="position:absolute;left:106.37px;top:325.66px" class="cls_007"><span class="cls_007">19</span></div>
+<div style="position:absolute;left:135.79px;top:325.66px" class="cls_007"><span class="cls_007">Vector  current</span></div>
+<div style="position:absolute;left:210.43px;top:325.66px" class="cls_007"><span class="cls_007">=</span><span class="cls_009"> null</span><span class="cls_007">;</span></div>
+<div style="position:absolute;left:106.37px;top:335.12px" class="cls_007"><span class="cls_007">20</span></div>
+<div style="position:absolute;left:135.53px;top:335.12px" class="cls_008"><span class="cls_008">//not  used  for</span></div>
+<div style="position:absolute;left:212.06px;top:335.12px" class="cls_008"><span class="cls_008">forward backward,  normalize</span></div>
+<div style="position:absolute;left:106.37px;top:344.58px" class="cls_007"><span class="cls_007">21</span></div>
+<div style="position:absolute;left:136.70px;top:344.58px" class="cls_009"><span class="cls_009">if</span></div>
+<div style="position:absolute;left:151.10px;top:344.58px" class="cls_007"><span class="cls_007">(isFB ==</span><span class="cls_009"> false </span><span class="cls_007">){</span></div>
+<div style="position:absolute;left:106.37px;top:354.05px" class="cls_007"><span class="cls_007">22</span></div>
+<div style="position:absolute;left:145.69px;top:354.05px" class="cls_008"><span class="cls_008">//new matrix = a∗O∗Transpose (T) ∗( prev forward )</span></div>
+<div style="position:absolute;left:106.37px;top:363.51px" class="cls_007"><span class="cls_007">23</span></div>
+<div style="position:absolute;left:146.22px;top:363.51px" class="cls_007"><span class="cls_007">current</span></div>
+<div style="position:absolute;left:185.02px;top:363.51px" class="cls_007"><span class="cls_007">= normalize(getO(obs[t]) .multiply(getT()).multiply(</span></div>
+<div style="position:absolute;left:166.07px;top:372.98px" class="cls_007"><span class="cls_007">prev forward));</span></div>
+<div style="position:absolute;left:106.37px;top:382.44px" class="cls_007"><span class="cls_007">24</span></div>
+<div style="position:absolute;left:135.39px;top:382.44px" class="cls_007"><span class="cls_007">}</span></div>
+<div style="position:absolute;left:106.37px;top:391.91px" class="cls_007"><span class="cls_007">25</span></div>
+<div style="position:absolute;left:136.38px;top:391.91px" class="cls_009"><span class="cls_009">else</span><span class="cls_007">{</span></div>
+<div style="position:absolute;left:106.37px;top:401.37px" class="cls_007"><span class="cls_007">26</span></div>
+<div style="position:absolute;left:145.69px;top:401.37px" class="cls_008"><span class="cls_008">//new matrix = a∗O∗Transpose (T) ∗( prev forward )</span></div>
+<div style="position:absolute;left:106.37px;top:410.84px" class="cls_007"><span class="cls_007">27</span></div>
+<div style="position:absolute;left:146.22px;top:410.84px" class="cls_007"><span class="cls_007">current</span></div>
+<div style="position:absolute;left:185.02px;top:410.84px" class="cls_007"><span class="cls_007">= getO(obs[t]) .multiply(getT()).multiply(prev forward);</span></div>
+<div style="position:absolute;left:106.37px;top:420.30px" class="cls_007"><span class="cls_007">28</span></div>
+<div style="position:absolute;left:135.39px;top:420.30px" class="cls_007"><span class="cls_007">}</span></div>
+<div style="position:absolute;left:106.37px;top:429.76px" class="cls_007"><span class="cls_007">29</span></div>
+<div style="position:absolute;left:106.37px;top:439.23px" class="cls_007"><span class="cls_007">30</span></div>
+<div style="position:absolute;left:136.42px;top:439.23px" class="cls_007"><span class="cls_007">state to t .add(current);</span></div>
+<div style="position:absolute;left:106.37px;top:448.69px" class="cls_007"><span class="cls_007">31</span></div>
+<div style="position:absolute;left:106.37px;top:458.16px" class="cls_007"><span class="cls_007">32</span></div>
+<div style="position:absolute;left:135.53px;top:458.16px" class="cls_008"><span class="cls_008">//recursiveCall</span></div>
+<div style="position:absolute;left:106.37px;top:467.62px" class="cls_007"><span class="cls_007">33</span></div>
+<div style="position:absolute;left:136.02px;top:467.62px" class="cls_009"><span class="cls_009">return</span><span class="cls_007">  forward(current ,  obs,  state to t ,  t+1, isFB);</span></div>
+<div style="position:absolute;left:106.37px;top:477.09px" class="cls_007"><span class="cls_007">34</span></div>
+<div style="position:absolute;left:125.22px;top:477.09px" class="cls_007"><span class="cls_007">}</span></div>
+<div style="position:absolute;left:124.80px;top:506.97px" class="cls_003"><span class="cls_003">3.2</span></div>
+<div style="position:absolute;left:155.44px;top:506.97px" class="cls_003"><span class="cls_003">Filtering Results</span></div>
+<div style="position:absolute;left:124.80px;top:527.35px" class="cls_005"><span class="cls_005">The following is a table of the probability distribution over locations.  Each</span></div>
+<div style="position:absolute;left:124.80px;top:539.31px" class="cls_005"><span class="cls_005">cell in the table represents a location at a specified time.  At time t=0, the</span></div>
+<div style="position:absolute;left:124.80px;top:551.26px" class="cls_005"><span class="cls_005">distribution is uniform, representing that the robot has no idea where it is. At</span></div>
+<div style="position:absolute;left:124.80px;top:563.22px" class="cls_005"><span class="cls_005">time t=1 the robot senses the presence of red and updates the belief state and</span></div>
+<div style="position:absolute;left:124.80px;top:575.17px" class="cls_005"><span class="cls_005">so on.</span></div>
+<div style="position:absolute;left:124.96px;top:592.61px" class="cls_007"><span class="cls_007">Maze :</span></div>
+<div style="position:absolute;left:125.68px;top:602.07px" class="cls_007"><span class="cls_007">rg</span></div>
+<div style="position:absolute;left:125.13px;top:611.53px" class="cls_007"><span class="cls_007">by</span></div>
+<div style="position:absolute;left:294.17px;top:740.60px" class="cls_005"><span class="cls_005">8</span></div>
+</div>
+<div style="position:absolute;left:50%;margin-left:-297px;top:6808px;width:595px;height:841px;border-style:outset;overflow:hidden">
+<div style="position:absolute;left:0px;top:0px">
+<img src="image_src/background09.jpg" width=595 height=841></div>
+<div style="position:absolute;left:172.91px;top:454.35px" class="cls_005"><span class="cls_005">Figure 2: Table of probability distribution over locations</span></div>
+<div style="position:absolute;left:139.75px;top:480.20px" class="cls_005"><span class="cls_005">The following is a graphical presentation of the same results as Figure 1.</span></div>
+<div style="position:absolute;left:124.80px;top:492.15px" class="cls_005"><span class="cls_005">Balkcom’s head represents the true location of the robot at time t. The black</span></div>
+<div style="position:absolute;left:124.80px;top:504.11px" class="cls_005"><span class="cls_005">bars represent the probability distribution at each location.  The hight of the</span></div>
+<div style="position:absolute;left:124.80px;top:516.06px" class="cls_005"><span class="cls_005">bar represents the probability value. 1 = a bar that spans the entire hight of a</span></div>
+<div style="position:absolute;left:124.80px;top:528.02px" class="cls_005"><span class="cls_005">tile. .5 = a bar that spans half the hight of a tile and so on.</span></div>
+<div style="position:absolute;left:294.17px;top:740.60px" class="cls_005"><span class="cls_005">9</span></div>
+</div>
+<div style="position:absolute;left:50%;margin-left:-297px;top:7659px;width:595px;height:841px;border-style:outset;overflow:hidden">
+<div style="position:absolute;left:0px;top:0px">
+<img src="image_src/background10.jpg" width=595 height=841></div>
+<div style="position:absolute;left:223.02px;top:286.76px" class="cls_005"><span class="cls_005">Figure 3: 2x2 Maze Filtering X</span><span class="cls_006"><sub>0:t</sub></span></div>
+<div style="position:absolute;left:139.75px;top:312.61px" class="cls_005"><span class="cls_005">However, Filtering is not always accurate.  Sometimes the most probable</span></div>
+<div style="position:absolute;left:124.80px;top:324.56px" class="cls_005"><span class="cls_005">location given a sequence of observations is not the actual location!  At times</span></div>
+<div style="position:absolute;left:124.80px;top:336.52px" class="cls_005"><span class="cls_005">t=8 and t=9 the most probable location is different than the actual location.</span></div>
+<div style="position:absolute;left:124.80px;top:348.47px" class="cls_005"><span class="cls_005">At t=8, this is because the red tile between the walls has a higher probability</span></div>
+<div style="position:absolute;left:124.80px;top:360.43px" class="cls_005"><span class="cls_005">(.5)of transitioning into itself than to the red tile adjacent it (.25).  Thus, the</span></div>
+<div style="position:absolute;left:124.80px;top:372.38px" class="cls_005"><span class="cls_005">calculation at t=8 carries over to t=9.</span></div>
+<div style="position:absolute;left:223.02px;top:579.42px" class="cls_005"><span class="cls_005">Figure 4: 4x4 Maze Filtering X</span><span class="cls_006"><sub>1:t</sub></span></div>
+<div style="position:absolute;left:124.80px;top:609.92px" class="cls_004"><span class="cls_004">4</span></div>
+<div style="position:absolute;left:149.01px;top:609.92px" class="cls_004"><span class="cls_004">Smoothing</span></div>
+<div style="position:absolute;left:124.80px;top:636.12px" class="cls_005"><span class="cls_005">Smoothing is the process of computing the belief state at a past time k, given</span></div>
+<div style="position:absolute;left:124.80px;top:648.08px" class="cls_005"><span class="cls_005">every observation up to the current time t where 0 &lt; k &lt; t:</span></div>
+<div style="position:absolute;left:273.74px;top:670.00px" class="cls_005"><span class="cls_005">P (X</span><span class="cls_006"><sub>k</sub></span><span class="cls_005"> |e</span><span class="cls_006"><sub>1:t</sub></span><span class="cls_005">)</span></div>
+<div style="position:absolute;left:450.80px;top:670.00px" class="cls_005"><span class="cls_005">(13)</span></div>
+<div style="position:absolute;left:291.68px;top:740.60px" class="cls_005"><span class="cls_005">10</span></div>
+</div>
+<div style="position:absolute;left:50%;margin-left:-297px;top:8510px;width:595px;height:841px;border-style:outset;overflow:hidden">
+<div style="position:absolute;left:0px;top:0px">
+<img src="image_src/background11.jpg" width=595 height=841></div>
+<div style="position:absolute;left:124.80px;top:122.92px" class="cls_003"><span class="cls_003">4.1</span></div>
+<div style="position:absolute;left:155.44px;top:122.92px" class="cls_003"><span class="cls_003">Forward-Backward Algorithm</span></div>
+<div style="position:absolute;left:124.80px;top:143.30px" class="cls_005"><span class="cls_005">Expresssion 13 can be split into two expressions, one which is the Forward</span></div>
+<div style="position:absolute;left:124.80px;top:155.25px" class="cls_005"><span class="cls_005">algorithm the other is the Backward algorithm:</span></div>
+<div style="position:absolute;left:137.85px;top:184.85px" class="cls_005"><span class="cls_005">P (X</span><span class="cls_006"><sub>k</sub></span><span class="cls_005"> |e</span><span class="cls_006"><sub>1:t</sub></span><span class="cls_005">) = αP (X</span><span class="cls_006"><sub>k</sub></span><span class="cls_005"> |e</span><span class="cls_006"><sub>1:k</sub></span><span class="cls_005"> )P (e</span><span class="cls_006"><sub>k+1:t</sub></span><span class="cls_005">|X</span><span class="cls_006"><sub>k</sub></span><span class="cls_005"> , e</span><span class="cls_006"><sub>1</sub></span><span class="cls_005"> : k)(Bayes)</span></div>
+<div style="position:absolute;left:186.44px;top:196.81px" class="cls_005"><span class="cls_005">= αP(X</span><span class="cls_006"><sub>k</sub></span><span class="cls_005">|e</span><span class="cls_006"><sub>1:k</sub></span><span class="cls_005">)P(e</span><span class="cls_006"><sub>k+1:t</sub></span><span class="cls_005">|X</span><span class="cls_006"><sub>k</sub></span><span class="cls_005">)(condit.Indepenanceseefig.1)</span></div>
+<div style="position:absolute;left:450.80px;top:196.91px" class="cls_005"><span class="cls_005">(14)</span></div>
+<div style="position:absolute;left:186.44px;top:208.77px" class="cls_005"><span class="cls_005">= αforward</span><span class="cls_006"><sub>1:k</sub></span><span class="cls_005">(x)backward</span><span class="cls_006"><sub>k+1:t</sub></span></div>
+<div style="position:absolute;left:139.75px;top:228.55px" class="cls_005"><span class="cls_005">Whereas the forward algorithm computes the probability distribution over</span></div>
+<div style="position:absolute;left:124.80px;top:240.50px" class="cls_005"><span class="cls_005">state variables given a sequence of observations, the backwards algorithm com-</span></div>
+<div style="position:absolute;left:124.80px;top:252.46px" class="cls_005"><span class="cls_005">putes the probability of a sequence of observations given probability distribu-</span></div>
+<div style="position:absolute;left:124.80px;top:264.41px" class="cls_005"><span class="cls_005">tions over state variables.</span></div>
+<div style="position:absolute;left:199.41px;top:286.54px" class="cls_005"><span class="cls_005">∑</span></div>
+<div style="position:absolute;left:129.78px;top:294.02px" class="cls_005"><span class="cls_005">P (e</span><span class="cls_006"><sub>k+1:t</sub></span><span class="cls_005">|X</span><span class="cls_006"><sub>k</sub></span><span class="cls_005"> ) =</span></div>
+<div style="position:absolute;left:209.93px;top:294.02px" class="cls_006"><span class="cls_006">x</span><span class="cls_011"><sub>k+1</sub></span><span class="cls_005"> P(e</span><span class="cls_006">k+1:t</span><span class="cls_005">|X</span><span class="cls_006">k</span><span class="cls_005">,x</span><span class="cls_006">k+1</span><span class="cls_005">)P(x</span><span class="cls_006">k+1</span><span class="cls_005">|X</span><span class="cls_006">k</span><span class="cls_005">)(JointProbability)</span></div>
+<div style="position:absolute;left:199.41px;top:298.60px" class="cls_005"><span class="cls_005">∑</span></div>
+<div style="position:absolute;left:188.90px;top:306.07px" class="cls_005"><span class="cls_005">=</span></div>
+<div style="position:absolute;left:209.93px;top:306.07px" class="cls_006"><span class="cls_006">x</span><span class="cls_011"><sub>k+1</sub></span><span class="cls_005"> P(e</span><span class="cls_006">k+1:t</span><span class="cls_005">|x</span><span class="cls_006">k+1</span><span class="cls_005">)P(x</span><span class="cls_006">k+1</span><span class="cls_005">|X</span><span class="cls_006">k</span><span class="cls_005">)(condit.Independanceseefig.1)</span></div>
+<div style="position:absolute;left:199.41px;top:310.66px" class="cls_005"><span class="cls_005">∑</span></div>
+<div style="position:absolute;left:188.90px;top:318.13px" class="cls_005"><span class="cls_005">=</span></div>
+<div style="position:absolute;left:209.93px;top:318.13px" class="cls_006"><span class="cls_006">x</span><span class="cls_011"><sub>k+1</sub></span><span class="cls_005"> P(e</span><span class="cls_006">k+1</span><span class="cls_005">,e</span><span class="cls_006">k+2:t</span><span class="cls_005">|x</span><span class="cls_006">k+1</span><span class="cls_005">)P(x</span><span class="cls_006">k+1</span><span class="cls_005">|X</span><span class="cls_006">k</span><span class="cls_005">)(seperatingobservations)</span></div>
+<div style="position:absolute;left:199.41px;top:322.72px" class="cls_005"><span class="cls_005">∑</span></div>
+<div style="position:absolute;left:188.90px;top:330.19px" class="cls_005"><span class="cls_005">=</span></div>
+<div style="position:absolute;left:209.93px;top:330.19px" class="cls_006"><span class="cls_006">x</span><span class="cls_011"><sub>k+1</sub></span><span class="cls_005"> P(e</span><span class="cls_006">k+1</span><span class="cls_005">|x</span><span class="cls_006">k+1</span><span class="cls_005">)P(e</span><span class="cls_006">k+2:t</span><span class="cls_005">|x</span><span class="cls_006">k+1</span><span class="cls_005">)P(x</span><span class="cls_006">k+1</span><span class="cls_005">|X</span><span class="cls_006">k</span><span class="cls_005">)</span></div>
+<div style="position:absolute;left:186.13px;top:342.25px" class="cls_005"><span class="cls_005">(condit.IndpOf e</span><span class="cls_006"><sub>k+1</sub></span><span class="cls_005">Andek + 2Givenx</span><span class="cls_006"><sub>k+1</sub></span><span class="cls_005">)</span></div>
+<div style="position:absolute;left:450.80px;top:366.26px" class="cls_005"><span class="cls_005">(15)</span></div>
+<div style="position:absolute;left:139.75px;top:378.22px" class="cls_005"><span class="cls_005">Like in the forward algorithm, the expression has been enumerated from</span></div>
+<div style="position:absolute;left:124.80px;top:390.17px" class="cls_005"><span class="cls_005">P (e</span><span class="cls_006"><sub>k+1:t</sub></span><span class="cls_005">|X</span><span class="cls_006"><sub>k</sub></span><span class="cls_005"> ) to several termsin the transition and observation models (P (e</span><span class="cls_006"><sub>k+1</sub></span><span class="cls_005">|x</span><span class="cls_006"><sub>k+1</sub></span><span class="cls_005">) =</span></div>
+<div style="position:absolute;left:124.80px;top:402.13px" class="cls_005"><span class="cls_005">O</span><span class="cls_006"><sub>i</sub></span><span class="cls_005"> and P(x</span><span class="cls_006"><sub>k+1</sub></span><span class="cls_005">|X</span><span class="cls_006"><sub>k</sub></span><span class="cls_005">) = T</span><span class="cls_006"><sub>ij</sub></span><span class="cls_005">). As for P(e</span><span class="cls_006"><sub>k+2:t</sub></span><span class="cls_005">|x</span><span class="cls_006"><sub>k+1</sub></span><span class="cls_005">), which is not known in the</span></div>
+<div style="position:absolute;left:124.80px;top:414.08px" class="cls_005"><span class="cls_005">models, it is expression at the next time step! Thus, the backward algorithm can</span></div>
+<div style="position:absolute;left:124.80px;top:426.04px" class="cls_005"><span class="cls_005">be defined as a recursive algorithm that probagates its message, backward</span><span class="cls_006"><sub>k+1:t</sub></span><span class="cls_005">,</span></div>
+<div style="position:absolute;left:124.80px;top:437.99px" class="cls_005"><span class="cls_005">backwards from t to k:</span></div>
+<div style="position:absolute;left:213.31px;top:460.12px" class="cls_005"><span class="cls_005">∑</span></div>
+<div style="position:absolute;left:137.79px;top:467.59px" class="cls_005"><span class="cls_005">backward</span><span class="cls_006"><sub>k+1:t</sub></span><span class="cls_005"> =</span></div>
+<div style="position:absolute;left:223.82px;top:467.59px" class="cls_006"><span class="cls_006">x</span><span class="cls_011"><sub>k+1</sub></span><span class="cls_005"> P(e</span><span class="cls_006">k+1</span><span class="cls_005">|x</span><span class="cls_006">k+1</span><span class="cls_005">)P(e</span><span class="cls_006">k+2:t</span><span class="cls_005">|x</span><span class="cls_006">k+1</span><span class="cls_005">)P(x</span><span class="cls_006">k+1</span><span class="cls_005">|X</span><span class="cls_006">k</span><span class="cls_005">)</span></div>
+<div style="position:absolute;left:202.79px;top:479.65px" class="cls_005"><span class="cls_005">= TO</span><span class="cls_006"><sub>k+1</sub></span><span class="cls_005">backward</span><span class="cls_006"><sub>k+2:t</sub></span><span class="cls_005">(matrixmultiplication)</span></div>
+<div style="position:absolute;left:202.79px;top:491.61px" class="cls_005"><span class="cls_005">= B ACKWARD</span><span class="cls_006"><sub>k+1:t</sub></span><span class="cls_005">(backward</span><span class="cls_006"><sub>k+2:t</sub></span><span class="cls_005">,e</span><span class="cls_006"><sub>k+1</sub></span><span class="cls_005">)(substitution)</span></div>
+<div style="position:absolute;left:450.80px;top:503.66px" class="cls_005"><span class="cls_005">(16)</span></div>
+<div style="position:absolute;left:139.75px;top:515.62px" class="cls_005"><span class="cls_005">The forwardbackward algorithm is much more accurate than just the forward</span></div>
+<div style="position:absolute;left:124.80px;top:527.57px" class="cls_005"><span class="cls_005">algorithm. However, the forwardbackward algorithm is not as memory efficient.</span></div>
+<div style="position:absolute;left:124.80px;top:539.53px" class="cls_005"><span class="cls_005">Its space complexity is O(f t) where f is the size of the forward message and t</span></div>
+<div style="position:absolute;left:124.80px;top:551.48px" class="cls_005"><span class="cls_005">is the number of time steps.</span></div>
+<div style="position:absolute;left:139.75px;top:563.44px" class="cls_005"><span class="cls_005">In my implementation of the forwardbackward algorithm, I used matrices</span></div>
+<div style="position:absolute;left:110.61px;top:580.20px" class="cls_007"><span class="cls_007">1</span></div>
+<div style="position:absolute;left:110.61px;top:589.67px" class="cls_007"><span class="cls_007">2</span></div>
+<div style="position:absolute;left:125.37px;top:589.67px" class="cls_008"><span class="cls_008">//Compute the  Belief  State  at  time k: P(State</span></div>
+<div style="position:absolute;left:358.25px;top:589.67px" class="cls_008"><span class="cls_008">0:k|</span></div>
+<div style="position:absolute;left:145.72px;top:599.13px" class="cls_008"><span class="cls_008">sequenceOfObservations 1:k)∗PsequenceOfObservations k+1:t|</span></div>
+<div style="position:absolute;left:145.82px;top:608.59px" class="cls_008"><span class="cls_008">State k+1:t)</span></div>
+<div style="position:absolute;left:110.61px;top:618.06px" class="cls_007"><span class="cls_007">3</span></div>
+<div style="position:absolute;left:125.37px;top:618.06px" class="cls_008"><span class="cls_008">//</span></div>
+<div style="position:absolute;left:110.61px;top:627.52px" class="cls_007"><span class="cls_007">4</span></div>
+<div style="position:absolute;left:125.37px;top:627.52px" class="cls_008"><span class="cls_008">//returns  a sequence  of  belief  states  at  each  step  of  the</span></div>
+<div style="position:absolute;left:145.83px;top:636.99px" class="cls_008"><span class="cls_008">observation</span></div>
+<div style="position:absolute;left:110.61px;top:646.45px" class="cls_007"><span class="cls_007">5</span></div>
+<div style="position:absolute;left:125.37px;top:646.45px" class="cls_008"><span class="cls_008">//parameters:  int []  obs  is  the  sequence  of  observations</span></div>
+<div style="position:absolute;left:110.61px;top:655.92px" class="cls_007"><span class="cls_007">6</span></div>
+<div style="position:absolute;left:125.93px;top:655.92px" class="cls_009"><span class="cls_009">public</span><span class="cls_007">  ArrayList&lt;Vector> smoothing ( </span><span class="cls_009">int</span><span class="cls_007"> [ ]  obs ){</span></div>
+<div style="position:absolute;left:110.61px;top:665.38px" class="cls_007"><span class="cls_007">7</span></div>
+<div style="position:absolute;left:136.02px;top:665.38px" class="cls_009"><span class="cls_009">return</span><span class="cls_007">  forwardBackward(obs);</span></div>
+<div style="position:absolute;left:110.61px;top:674.85px" class="cls_007"><span class="cls_007">8</span></div>
+<div style="position:absolute;left:125.22px;top:674.85px" class="cls_007"><span class="cls_007">}</span></div>
+<div style="position:absolute;left:110.61px;top:684.31px" class="cls_007"><span class="cls_007">9</span></div>
+<div style="position:absolute;left:106.37px;top:693.77px" class="cls_007"><span class="cls_007">10</span></div>
+<div style="position:absolute;left:125.37px;top:693.77px" class="cls_008"><span class="cls_008">//Compute the  Belief  State  at  time k: P(State</span></div>
+<div style="position:absolute;left:358.25px;top:693.77px" class="cls_008"><span class="cls_008">0:k|</span></div>
+<div style="position:absolute;left:145.72px;top:703.24px" class="cls_008"><span class="cls_008">sequenceOfObservations 1:k)∗PsequenceOfObservations k+1:t|</span></div>
+<div style="position:absolute;left:145.82px;top:712.70px" class="cls_008"><span class="cls_008">State k+1:t)</span></div>
+<div style="position:absolute;left:291.68px;top:740.60px" class="cls_005"><span class="cls_005">11</span></div>
+</div>
+<div style="position:absolute;left:50%;margin-left:-297px;top:9361px;width:595px;height:841px;border-style:outset;overflow:hidden">
+<div style="position:absolute;left:0px;top:0px">
+<img src="image_src/background12.jpg" width=595 height=841></div>
+<div style="position:absolute;left:106.37px;top:126.90px" class="cls_007"><span class="cls_007">11</span></div>
+<div style="position:absolute;left:125.37px;top:126.90px" class="cls_008"><span class="cls_008">//</span></div>
+<div style="position:absolute;left:106.37px;top:136.37px" class="cls_007"><span class="cls_007">12</span></div>
+<div style="position:absolute;left:125.37px;top:136.37px" class="cls_008"><span class="cls_008">//returns  a sequence  of  belief  states  at  each  step  of  the</span></div>
+<div style="position:absolute;left:145.83px;top:145.83px" class="cls_008"><span class="cls_008">observation</span></div>
+<div style="position:absolute;left:106.37px;top:155.29px" class="cls_007"><span class="cls_007">13</span></div>
+<div style="position:absolute;left:125.37px;top:155.29px" class="cls_008"><span class="cls_008">//parameters:  int []  obs  is  the  sequence  of  observations</span></div>
+<div style="position:absolute;left:106.37px;top:164.76px" class="cls_007"><span class="cls_007">14</span></div>
+<div style="position:absolute;left:125.98px;top:164.76px" class="cls_009"><span class="cls_009">private</span><span class="cls_007">  ArrayList&lt;Vector> forwardBackward( </span><span class="cls_009">int</span><span class="cls_007"> [ ]  obs ){</span></div>
+<div style="position:absolute;left:106.37px;top:174.22px" class="cls_007"><span class="cls_007">15</span></div>
+<div style="position:absolute;left:106.37px;top:183.69px" class="cls_007"><span class="cls_007">16</span></div>
+<div style="position:absolute;left:135.86px;top:183.69px" class="cls_007"><span class="cls_007">ArrayList&lt;Vector> forward vectors</span></div>
+<div style="position:absolute;left:306.97px;top:183.69px" class="cls_007"><span class="cls_007">=</span><span class="cls_009"> new</span><span class="cls_007">  ArrayList&lt;Vector >() ;</span></div>
+<div style="position:absolute;left:106.37px;top:193.15px" class="cls_007"><span class="cls_007">17</span></div>
+<div style="position:absolute;left:135.85px;top:193.15px" class="cls_007"><span class="cls_007">forward(state.get(0) ,  obs,  forward vectors ,</span></div>
+<div style="position:absolute;left:359.43px;top:193.15px" class="cls_007"><span class="cls_007">0,</span><span class="cls_009">  true</span><span class="cls_007">);</span></div>
+<div style="position:absolute;left:106.37px;top:202.62px" class="cls_007"><span class="cls_007">18</span></div>
+<div style="position:absolute;left:106.37px;top:212.08px" class="cls_007"><span class="cls_007">19</span></div>
+<div style="position:absolute;left:135.86px;top:212.08px" class="cls_007"><span class="cls_007">ArrayList&lt;Vector> backward vectors =</span><span class="cls_009"> new</span><span class="cls_007"> ArrayList&lt;Vector >() ;</span></div>
+<div style="position:absolute;left:106.37px;top:221.55px" class="cls_007"><span class="cls_007">20</span></div>
+<div style="position:absolute;left:106.37px;top:231.01px" class="cls_007"><span class="cls_007">21</span></div>
+<div style="position:absolute;left:135.53px;top:231.01px" class="cls_008"><span class="cls_008">//backwards  algorithm  starts  with a  vector  filled  with  ones</span></div>
+<div style="position:absolute;left:106.37px;top:240.47px" class="cls_007"><span class="cls_007">22</span></div>
+<div style="position:absolute;left:135.83px;top:240.47px" class="cls_009"><span class="cls_009">double</span><span class="cls_007"> []  firstBack</span></div>
+<div style="position:absolute;left:230.75px;top:240.47px" class="cls_007"><span class="cls_007">=</span><span class="cls_009"> new  double</span><span class="cls_007"> [ state . get (0) . length () ] ;</span></div>
+<div style="position:absolute;left:106.37px;top:249.94px" class="cls_007"><span class="cls_007">23</span></div>
+<div style="position:absolute;left:135.75px;top:249.94px" class="cls_007"><span class="cls_007">Arrays. fill (firstBack ,</span></div>
+<div style="position:absolute;left:253.07px;top:249.94px" class="cls_007"><span class="cls_007">1.0);</span></div>
+<div style="position:absolute;left:106.37px;top:259.40px" class="cls_007"><span class="cls_007">24</span></div>
+<div style="position:absolute;left:135.94px;top:259.40px" class="cls_007"><span class="cls_007">backward vectors.add(0,</span><span class="cls_009">new</span><span class="cls_007"> BasicVector(firstBack));</span></div>
+<div style="position:absolute;left:106.37px;top:268.87px" class="cls_007"><span class="cls_007">25</span></div>
+<div style="position:absolute;left:106.37px;top:278.33px" class="cls_007"><span class="cls_007">26</span></div>
+<div style="position:absolute;left:135.53px;top:278.33px" class="cls_007"><span class="cls_007">backward(backward vectors.get(0) ,  obs,  obs.length−1,</span></div>
+<div style="position:absolute;left:155.81px;top:287.80px" class="cls_007"><span class="cls_007">backward vectors ,</span><span class="cls_009">  true</span><span class="cls_007">);</span></div>
+<div style="position:absolute;left:106.37px;top:297.26px" class="cls_007"><span class="cls_007">27</span></div>
+<div style="position:absolute;left:106.37px;top:306.73px" class="cls_007"><span class="cls_007">28</span></div>
+<div style="position:absolute;left:136.25px;top:306.73px" class="cls_009"><span class="cls_009">for</span></div>
+<div style="position:absolute;left:156.18px;top:306.73px" class="cls_007"><span class="cls_007">( </span><span class="cls_009">int</span><span class="cls_007">  i =0;  i&lt;obs . length ;  i++){</span></div>
+<div style="position:absolute;left:106.37px;top:316.19px" class="cls_007"><span class="cls_007">29</span></div>
+<div style="position:absolute;left:146.37px;top:316.19px" class="cls_007"><span class="cls_007">state.add(normalize(forward vectors.get(i).hadamardProduct(</span></div>
+<div style="position:absolute;left:166.02px;top:325.66px" class="cls_007"><span class="cls_007">backward vectors.get(i))));</span></div>
+<div style="position:absolute;left:106.37px;top:335.12px" class="cls_007"><span class="cls_007">30</span></div>
+<div style="position:absolute;left:135.39px;top:335.12px" class="cls_007"><span class="cls_007">}</span></div>
+<div style="position:absolute;left:106.37px;top:344.58px" class="cls_007"><span class="cls_007">31</span></div>
+<div style="position:absolute;left:136.02px;top:344.58px" class="cls_009"><span class="cls_009">return</span><span class="cls_007">  state;</span></div>
+<div style="position:absolute;left:106.37px;top:354.05px" class="cls_007"><span class="cls_007">32</span></div>
+<div style="position:absolute;left:125.22px;top:354.05px" class="cls_007"><span class="cls_007">}</span></div>
+<div style="position:absolute;left:106.37px;top:363.51px" class="cls_007"><span class="cls_007">33</span></div>
+<div style="position:absolute;left:106.37px;top:372.98px" class="cls_007"><span class="cls_007">34</span></div>
+<div style="position:absolute;left:125.98px;top:372.98px" class="cls_009"><span class="cls_009">private</span><span class="cls_007">  ArrayList&lt;Vector> backward( Vector  prev backward ,</span><span class="cls_009">  int</span><span class="cls_007"> [ ]  obs ,</span></div>
+<div style="position:absolute;left:151.03px;top:382.44px" class="cls_009"><span class="cls_009">int</span><span class="cls_007">  t ,  ArrayList&lt;Vector> state to</span></div>
+<div style="position:absolute;left:320.91px;top:382.44px" class="cls_007"><span class="cls_007">1 ,</span><span class="cls_009">  boolean</span><span class="cls_007">  isFB){</span></div>
+<div style="position:absolute;left:106.37px;top:391.91px" class="cls_007"><span class="cls_007">35</span></div>
+<div style="position:absolute;left:135.53px;top:391.91px" class="cls_008"><span class="cls_008">//Base Case</span></div>
+<div style="position:absolute;left:106.37px;top:401.37px" class="cls_007"><span class="cls_007">36</span></div>
+<div style="position:absolute;left:136.70px;top:401.37px" class="cls_009"><span class="cls_009">if</span></div>
+<div style="position:absolute;left:151.10px;top:401.37px" class="cls_007"><span class="cls_007">(t</span></div>
+<div style="position:absolute;left:164.45px;top:401.37px" class="cls_007"><span class="cls_007">&lt; 1){</span></div>
+<div style="position:absolute;left:106.37px;top:410.84px" class="cls_007"><span class="cls_007">37</span></div>
+<div style="position:absolute;left:146.19px;top:410.84px" class="cls_009"><span class="cls_009">return</span><span class="cls_007">  state to</span></div>
+<div style="position:absolute;left:225.90px;top:410.84px" class="cls_007"><span class="cls_007">1 ;</span></div>
+<div style="position:absolute;left:106.37px;top:420.30px" class="cls_007"><span class="cls_007">38</span></div>
+<div style="position:absolute;left:135.39px;top:420.30px" class="cls_007"><span class="cls_007">}</span></div>
+<div style="position:absolute;left:106.37px;top:429.76px" class="cls_007"><span class="cls_007">39</span></div>
+<div style="position:absolute;left:106.37px;top:439.23px" class="cls_007"><span class="cls_007">40</span></div>
+<div style="position:absolute;left:135.53px;top:439.23px" class="cls_008"><span class="cls_008">//Recursive  Case</span></div>
+<div style="position:absolute;left:106.37px;top:448.69px" class="cls_007"><span class="cls_007">41</span></div>
+<div style="position:absolute;left:106.37px;top:458.16px" class="cls_007"><span class="cls_007">42</span></div>
+<div style="position:absolute;left:135.79px;top:458.16px" class="cls_007"><span class="cls_007">Vector  current</span></div>
+<div style="position:absolute;left:210.43px;top:458.16px" class="cls_007"><span class="cls_007">=</span><span class="cls_009"> null</span><span class="cls_007">;</span></div>
+<div style="position:absolute;left:106.37px;top:467.62px" class="cls_007"><span class="cls_007">43</span></div>
+<div style="position:absolute;left:136.70px;top:467.62px" class="cls_009"><span class="cls_009">if</span></div>
+<div style="position:absolute;left:151.10px;top:467.62px" class="cls_007"><span class="cls_007">(isFB</span></div>
+<div style="position:absolute;left:181.10px;top:467.62px" class="cls_007"><span class="cls_007">!=</span><span class="cls_009">  true</span><span class="cls_007"> ){</span></div>
+<div style="position:absolute;left:106.37px;top:477.09px" class="cls_007"><span class="cls_007">44</span></div>
+<div style="position:absolute;left:145.69px;top:477.09px" class="cls_008"><span class="cls_008">//new matrix = a∗T∗O∗( prev backward )</span></div>
+<div style="position:absolute;left:106.37px;top:486.55px" class="cls_007"><span class="cls_007">45</span></div>
+<div style="position:absolute;left:146.22px;top:486.55px" class="cls_007"><span class="cls_007">current</span></div>
+<div style="position:absolute;left:185.02px;top:486.55px" class="cls_007"><span class="cls_007">= normalize(getT().multiply(getO(obs[t])).multiply(</span></div>
+<div style="position:absolute;left:165.85px;top:496.02px" class="cls_007"><span class="cls_007">prev backward));</span></div>
+<div style="position:absolute;left:106.37px;top:505.48px" class="cls_007"><span class="cls_007">46</span></div>
+<div style="position:absolute;left:135.39px;top:505.48px" class="cls_007"><span class="cls_007">}</span></div>
+<div style="position:absolute;left:106.37px;top:514.95px" class="cls_007"><span class="cls_007">47</span></div>
+<div style="position:absolute;left:136.38px;top:514.95px" class="cls_009"><span class="cls_009">else</span><span class="cls_007">{</span></div>
+<div style="position:absolute;left:106.37px;top:524.41px" class="cls_007"><span class="cls_007">48</span></div>
+<div style="position:absolute;left:145.69px;top:524.41px" class="cls_008"><span class="cls_008">//new matrix = T∗O∗( prev backward )</span></div>
+<div style="position:absolute;left:106.37px;top:533.87px" class="cls_007"><span class="cls_007">49</span></div>
+<div style="position:absolute;left:146.22px;top:533.87px" class="cls_007"><span class="cls_007">current</span></div>
+<div style="position:absolute;left:185.02px;top:533.87px" class="cls_007"><span class="cls_007">= getT().multiply(getO(obs[t])).multiply(prev backward)</span></div>
+<div style="position:absolute;left:166.42px;top:543.34px" class="cls_007"><span class="cls_007">;</span></div>
+<div style="position:absolute;left:106.37px;top:552.80px" class="cls_007"><span class="cls_007">50</span></div>
+<div style="position:absolute;left:135.39px;top:552.80px" class="cls_007"><span class="cls_007">}</span></div>
+<div style="position:absolute;left:106.37px;top:562.27px" class="cls_007"><span class="cls_007">51</span></div>
+<div style="position:absolute;left:106.37px;top:571.73px" class="cls_007"><span class="cls_007">52</span></div>
+<div style="position:absolute;left:136.33px;top:571.73px" class="cls_007"><span class="cls_007">state to</span></div>
+<div style="position:absolute;left:180.17px;top:571.73px" class="cls_007"><span class="cls_007">1 .add(0,  current);</span></div>
+<div style="position:absolute;left:106.37px;top:581.20px" class="cls_007"><span class="cls_007">53</span></div>
+<div style="position:absolute;left:106.37px;top:590.66px" class="cls_007"><span class="cls_007">54</span></div>
+<div style="position:absolute;left:135.53px;top:590.66px" class="cls_008"><span class="cls_008">//recursiveCall</span></div>
+<div style="position:absolute;left:106.37px;top:600.13px" class="cls_007"><span class="cls_007">55</span></div>
+<div style="position:absolute;left:136.02px;top:600.13px" class="cls_009"><span class="cls_009">return</span><span class="cls_007">  backward(current ,  obs,  t−1,  state to</span></div>
+<div style="position:absolute;left:356.87px;top:600.13px" class="cls_007"><span class="cls_007">1 ,  isFB);</span></div>
+<div style="position:absolute;left:106.37px;top:609.59px" class="cls_007"><span class="cls_007">56</span></div>
+<div style="position:absolute;left:125.22px;top:609.59px" class="cls_007"><span class="cls_007">}</span></div>
+<div style="position:absolute;left:124.80px;top:639.47px" class="cls_003"><span class="cls_003">4.2</span></div>
+<div style="position:absolute;left:155.44px;top:639.47px" class="cls_003"><span class="cls_003">Smoothing Results</span></div>
+<div style="position:absolute;left:124.80px;top:659.85px" class="cls_005"><span class="cls_005">The following is a table of the probability distribution over locations.  Each</span></div>
+<div style="position:absolute;left:124.80px;top:671.81px" class="cls_005"><span class="cls_005">cell in the table represents a location at a specified time.  At time t=0, the</span></div>
+<div style="position:absolute;left:124.80px;top:683.76px" class="cls_005"><span class="cls_005">distribution is uniform, representing that the robot has no idea where it is. At</span></div>
+<div style="position:absolute;left:124.80px;top:695.72px" class="cls_005"><span class="cls_005">time t=1 the robot senses the presence of red and updates the belief state and</span></div>
+<div style="position:absolute;left:124.80px;top:707.67px" class="cls_005"><span class="cls_005">so on.</span></div>
+<div style="position:absolute;left:291.68px;top:740.60px" class="cls_005"><span class="cls_005">12</span></div>
+</div>
+<div style="position:absolute;left:50%;margin-left:-297px;top:10212px;width:595px;height:841px;border-style:outset;overflow:hidden">
+<div style="position:absolute;left:0px;top:0px">
+<img src="image_src/background13.jpg" width=595 height=841></div>
+<div style="position:absolute;left:139.75px;top:124.91px" class="cls_005"><span class="cls_005">Excluding the belief states at time = 0 and time = t, the forward backward</span></div>
+<div style="position:absolute;left:124.80px;top:136.86px" class="cls_005"><span class="cls_005">algorithm is much more accurate than the forward algorithm. At time = 0 and</span></div>
+<div style="position:absolute;left:124.80px;top:148.82px" class="cls_005"><span class="cls_005">time = t, the distributions returned from forward-backward and forward are</span></div>
+<div style="position:absolute;left:124.80px;top:160.77px" class="cls_005"><span class="cls_005">exactly the same. Looking at Figures 1. and 5. shows this is true.</span></div>
+<div style="position:absolute;left:226.24px;top:512.51px" class="cls_005"><span class="cls_005">Figure 5: 2x2 ForwardBackward</span></div>
+<div style="position:absolute;left:139.75px;top:538.36px" class="cls_005"><span class="cls_005">The following is a graphical presentation of the same results as Figure 5.</span></div>
+<div style="position:absolute;left:291.68px;top:740.60px" class="cls_005"><span class="cls_005">13</span></div>
+</div>
+<div style="position:absolute;left:50%;margin-left:-297px;top:11063px;width:595px;height:841px;border-style:outset;overflow:hidden">
+<div style="position:absolute;left:0px;top:0px">
+<img src="image_src/background14.jpg" width=595 height=841></div>
+<div style="position:absolute;left:226.24px;top:284.73px" class="cls_005"><span class="cls_005">Figure 6: 2x2 ForwardBackward</span></div>
+<div style="position:absolute;left:124.80px;top:315.23px" class="cls_004"><span class="cls_004">5</span></div>
+<div style="position:absolute;left:149.01px;top:315.23px" class="cls_004"><span class="cls_004">Forward vs. ForwardBackward</span></div>
+<div style="position:absolute;left:124.80px;top:341.43px" class="cls_003"><span class="cls_003">5.1</span></div>
+<div style="position:absolute;left:155.44px;top:341.43px" class="cls_003"><span class="cls_003">Accuracy</span></div>
+<div style="position:absolute;left:124.80px;top:361.82px" class="cls_005"><span class="cls_005">In many cases, filtering makes mistakes. At time k, it makes many more mistakes</span></div>
+<div style="position:absolute;left:124.80px;top:373.77px" class="cls_005"><span class="cls_005">than smoothing.  For example, at time = 8 the robot believes it is on the red</span></div>
+<div style="position:absolute;left:124.80px;top:385.73px" class="cls_005"><span class="cls_005">tile between the walls.  This is because the filtering gets no information from</span></div>
+<div style="position:absolute;left:124.80px;top:397.68px" class="cls_005"><span class="cls_005">observations made after k.</span></div>
+<div style="position:absolute;left:158.26px;top:604.72px" class="cls_005"><span class="cls_005">Figure 7: 4x4maze filtering: pobability distribution of locations</span></div>
+<div style="position:absolute;left:291.68px;top:740.60px" class="cls_005"><span class="cls_005">14</span></div>
+</div>
+<div style="position:absolute;left:50%;margin-left:-297px;top:11914px;width:595px;height:841px;border-style:outset;overflow:hidden">
+<div style="position:absolute;left:0px;top:0px">
+<img src="image_src/background15.jpg" width=595 height=841></div>
+<div style="position:absolute;left:152.57px;top:309.66px" class="cls_005"><span class="cls_005">Figure 8: 4x4maze smoothing: pobability distribution of locations</span></div>
+<div style="position:absolute;left:124.80px;top:337.49px" class="cls_003"><span class="cls_003">5.2</span></div>
+<div style="position:absolute;left:155.44px;top:337.49px" class="cls_003"><span class="cls_003">Dealing with a Noisy Channel</span></div>
+<div style="position:absolute;left:124.80px;top:357.87px" class="cls_005"><span class="cls_005">Since the sensors of the robot are prone to error, it is important to have al-</span></div>
+<div style="position:absolute;left:124.80px;top:369.83px" class="cls_005"><span class="cls_005">gorithms which can deal with error.  This error is treated as a noisy channel,</span></div>
+<div style="position:absolute;left:124.80px;top:381.78px" class="cls_005"><span class="cls_005">and the error rate is accounted for in the observation model.  First, in figures</span></div>
+<div style="position:absolute;left:124.80px;top:393.74px" class="cls_005"><span class="cls_005">11 and 12, results from filtering and smoothing respectively of a sequence of</span></div>
+<div style="position:absolute;left:124.80px;top:405.70px" class="cls_005"><span class="cls_005">observations with no error are shown.</span></div>
+<div style="position:absolute;left:180.12px;top:630.39px" class="cls_005"><span class="cls_005">Figure 9: Filtering: no errors in observation sequence</span></div>
+<div style="position:absolute;left:291.68px;top:740.60px" class="cls_005"><span class="cls_005">15</span></div>
+</div>
+<div style="position:absolute;left:50%;margin-left:-297px;top:12765px;width:595px;height:841px;border-style:outset;overflow:hidden">
+<div style="position:absolute;left:0px;top:0px">
+<img src="image_src/background16.jpg" width=595 height=841></div>
+<div style="position:absolute;left:173.01px;top:326.69px" class="cls_005"><span class="cls_005">Figure 10: Smoothing: no errors in observation sequence</span></div>
+<div style="position:absolute;left:139.75px;top:352.54px" class="cls_005"><span class="cls_005">However, in figures 13 and 14 there is an error at time = 1. Instead of reading</span></div>
+<div style="position:absolute;left:124.80px;top:364.49px" class="cls_005"><span class="cls_005">yellow, the robot reads red. With filtering, not only, does the distribution not</span></div>
+<div style="position:absolute;left:124.80px;top:376.45px" class="cls_005"><span class="cls_005">make an accurate inference afterword, but the distribution is not even clustered</span></div>
+<div style="position:absolute;left:124.80px;top:388.41px" class="cls_005"><span class="cls_005">around the actual distribution.  However, with smoothing, the distribution re-</span></div>
+<div style="position:absolute;left:124.80px;top:400.36px" class="cls_005"><span class="cls_005">covers after the erronious sensor reading. And, even at the erronious time step,</span></div>
+<div style="position:absolute;left:124.80px;top:412.32px" class="cls_005"><span class="cls_005">the distribution is clustered around the actual location.</span></div>
+<div style="position:absolute;left:206.72px;top:637.01px" class="cls_005"><span class="cls_005">Figure 11: Filtering: 1 Error at time t=1</span></div>
+<div style="position:absolute;left:291.68px;top:740.60px" class="cls_005"><span class="cls_005">16</span></div>
+</div>
+<div style="position:absolute;left:50%;margin-left:-297px;top:13616px;width:595px;height:841px;border-style:outset;overflow:hidden">
+<div style="position:absolute;left:0px;top:0px">
+<img src="image_src/background17.jpg" width=595 height=841></div>
+<div style="position:absolute;left:202.10px;top:326.69px" class="cls_005"><span class="cls_005">Figure 12: Smoothing: 1 Error at time t=1</span></div>
+<div style="position:absolute;left:139.75px;top:352.54px" class="cls_005"><span class="cls_005">My results suggest that filtering should be used only to update and predict</span></div>
+<div style="position:absolute;left:124.80px;top:364.49px" class="cls_005"><span class="cls_005">states in the future. To infer the belief state at previously observed timeslices,</span></div>
+<div style="position:absolute;left:124.80px;top:376.45px" class="cls_005"><span class="cls_005">Forward-Backward should be used.</span></div>
+<div style="position:absolute;left:124.80px;top:405.01px" class="cls_004"><span class="cls_004">6</span></div>
+<div style="position:absolute;left:149.01px;top:405.01px" class="cls_004"><span class="cls_004">Most Likely Path</span></div>
+<div style="position:absolute;left:124.80px;top:431.22px" class="cls_005"><span class="cls_005">To calculate the most likely path taken, the robot must find the most likely</span></div>
+<div style="position:absolute;left:124.80px;top:443.17px" class="cls_005"><span class="cls_005">path to the most likely variable at time t+1.</span></div>
+<div style="position:absolute;left:236.23px;top:466.98px" class="cls_005"><span class="cls_005">max</span><span class="cls_006">x</span><span class="cls_011">1:t</span><span class="cls_005"> P (x</span><span class="cls_006"><sub>1:t</sub></span><span class="cls_005">, Xt + 1|e</span><span class="cls_006"><sub>1:t+1</sub></span><span class="cls_005">)</span></div>
+<div style="position:absolute;left:450.80px;top:467.08px" class="cls_005"><span class="cls_005">(17)</span></div>
+<div style="position:absolute;left:124.80px;top:492.98px" class="cls_003"><span class="cls_003">6.1</span></div>
+<div style="position:absolute;left:155.44px;top:492.98px" class="cls_003"><span class="cls_003">Virterbi Algorithm</span></div>
+<div style="position:absolute;left:124.80px;top:513.36px" class="cls_005"><span class="cls_005">The Viterbi Algorithm computes expression 17.  An interesting perspectve of</span></div>
+<div style="position:absolute;left:124.80px;top:525.32px" class="cls_005"><span class="cls_005">the Viterbi Algorithm is to view it as modified breadth first search, where the</span></div>
+<div style="position:absolute;left:124.80px;top:537.27px" class="cls_005"><span class="cls_005">depth is defined by time, the goal is defined by argmax</span><span class="cls_006"><sub>x</sub></span><span class="cls_005">P (X</span><span class="cls_006"><sub>t+1</sub></span><span class="cls_005">|e</span><span class="cls_006"><sub>t+1</sub></span><span class="cls_005">), and the</span></div>
+<div style="position:absolute;left:124.80px;top:549.23px" class="cls_005"><span class="cls_005">get neighbors function is a modified filtering update function.Thus:</span></div>
+<div style="position:absolute;left:174.91px;top:570.55px" class="cls_005"><span class="cls_005">max</span><span class="cls_006">x</span><span class="cls_011">1:t</span><span class="cls_005"> P (x</span><span class="cls_006"><sub>1:t</sub></span><span class="cls_005">, Xt + 1|e</span><span class="cls_006"><sub>1:t+1</sub></span><span class="cls_005">)</span></div>
+<div style="position:absolute;left:450.80px;top:576.62px" class="cls_005"><span class="cls_005">(18)</span></div>
+<div style="position:absolute;left:174.91px;top:582.50px" class="cls_005"><span class="cls_005">= αP(e</span><span class="cls_006"><sub>t+1</sub></span><span class="cls_005">|X</span><span class="cls_006"><sub>t+1</sub></span><span class="cls_005">)(P(X</span><span class="cls_006"><sub>t+1</sub></span><span class="cls_005">|x</span><span class="cls_006"><sub>t</sub></span><span class="cls_005">)max</span><span class="cls_006"><sub>x1:t−1</sub></span><span class="cls_005">P(x</span><span class="cls_006"><sub>1:t−1</sub></span><span class="cls_005">),x</span><span class="cls_006"><sub>t</sub></span><span class="cls_005">|e</span><span class="cls_006"><sub>1:t</sub></span><span class="cls_005">)</span></div>
+<div style="position:absolute;left:139.75px;top:599.98px" class="cls_005"><span class="cls_005">Viterbi, like filtering takes linear time.  But unlike filtering, which only re-</span></div>
+<div style="position:absolute;left:124.80px;top:611.93px" class="cls_005"><span class="cls_005">quires constant space, Viterbi’s memory usage grows linearly with time, because</span></div>
+<div style="position:absolute;left:124.80px;top:623.89px" class="cls_005"><span class="cls_005">it has to keep track of back pointers.</span></div>
+<div style="position:absolute;left:110.61px;top:641.32px" class="cls_007"><span class="cls_007">1</span></div>
+<div style="position:absolute;left:125.37px;top:641.32px" class="cls_008"><span class="cls_008">//Compute the Most  Likely  Path through  the  state  space  given a</span></div>
+<div style="position:absolute;left:145.66px;top:650.79px" class="cls_008"><span class="cls_008">sequence  of  observations</span></div>
+<div style="position:absolute;left:110.61px;top:660.25px" class="cls_007"><span class="cls_007">2</span></div>
+<div style="position:absolute;left:125.37px;top:660.25px" class="cls_008"><span class="cls_008">//</span></div>
+<div style="position:absolute;left:110.61px;top:669.72px" class="cls_007"><span class="cls_007">3</span></div>
+<div style="position:absolute;left:125.37px;top:669.72px" class="cls_008"><span class="cls_008">//I  didn’t  use  la4j  in  Viterbi</span></div>
+<div style="position:absolute;left:110.61px;top:679.18px" class="cls_007"><span class="cls_007">4</span></div>
+<div style="position:absolute;left:125.37px;top:679.18px" class="cls_008"><span class="cls_008">//</span></div>
+<div style="position:absolute;left:110.61px;top:688.65px" class="cls_007"><span class="cls_007">5</span></div>
+<div style="position:absolute;left:125.37px;top:688.65px" class="cls_008"><span class="cls_008">//returns  an array  of  ints  representing  state  variables</span></div>
+<div style="position:absolute;left:110.61px;top:698.11px" class="cls_007"><span class="cls_007">6</span></div>
+<div style="position:absolute;left:125.37px;top:698.11px" class="cls_008"><span class="cls_008">//parameters:  int []  obs  is  the  sequence  of  observations</span></div>
+<div style="position:absolute;left:110.61px;top:707.58px" class="cls_007"><span class="cls_007">7</span></div>
+<div style="position:absolute;left:125.93px;top:707.58px" class="cls_009"><span class="cls_009">public  int</span><span class="cls_007"> []  mostLikelySequence(</span><span class="cls_009">int</span><span class="cls_007"> []  obs){</span></div>
+<div style="position:absolute;left:291.68px;top:740.60px" class="cls_005"><span class="cls_005">17</span></div>
+</div>
+<div style="position:absolute;left:50%;margin-left:-297px;top:14467px;width:595px;height:841px;border-style:outset;overflow:hidden">
+<div style="position:absolute;left:0px;top:0px">
+<img src="image_src/background18.jpg" width=595 height=841></div>
+<div style="position:absolute;left:110.61px;top:126.90px" class="cls_007"><span class="cls_007">8</span></div>
+<div style="position:absolute;left:135.53px;top:126.90px" class="cls_008"><span class="cls_008">//initialize  state  at  t0:</span></div>
+<div style="position:absolute;left:110.61px;top:136.37px" class="cls_007"><span class="cls_007">9</span></div>
+<div style="position:absolute;left:135.82px;top:136.37px" class="cls_009"><span class="cls_009">double</span><span class="cls_007"> []  start probability</span></div>
+<div style="position:absolute;left:271.40px;top:136.37px" class="cls_007"><span class="cls_007">=</span><span class="cls_009"> new  double</span><span class="cls_007"> [ transition  model . rows () ] ;</span></div>
+<div style="position:absolute;left:106.37px;top:145.83px" class="cls_007"><span class="cls_007">10</span></div>
+<div style="position:absolute;left:135.75px;top:145.83px" class="cls_007"><span class="cls_007">Arrays. fill (start probability ,</span></div>
+<div style="position:absolute;left:293.35px;top:145.83px" class="cls_007"><span class="cls_007">1);</span></div>
+<div style="position:absolute;left:106.37px;top:155.29px" class="cls_007"><span class="cls_007">11</span></div>
+<div style="position:absolute;left:136.02px;top:155.29px" class="cls_009"><span class="cls_009">return</span><span class="cls_007">  viterbi(obs,</span></div>
+<div style="position:absolute;left:237.48px;top:155.29px" class="cls_007"><span class="cls_007">0,  start probability ,</span><span class="cls_009">  new int</span><span class="cls_007">[obs.length ][]) ;</span></div>
+<div style="position:absolute;left:106.37px;top:164.76px" class="cls_007"><span class="cls_007">12</span></div>
+<div style="position:absolute;left:125.22px;top:164.76px" class="cls_007"><span class="cls_007">}</span></div>
+<div style="position:absolute;left:106.37px;top:174.22px" class="cls_007"><span class="cls_007">13</span></div>
+<div style="position:absolute;left:106.37px;top:183.69px" class="cls_007"><span class="cls_007">14</span></div>
+<div style="position:absolute;left:125.37px;top:183.69px" class="cls_008"><span class="cls_008">//Recursive  Viterbi:  At time t,  find  the most  probable  path  for</span></div>
+<div style="position:absolute;left:145.67px;top:193.15px" class="cls_008"><span class="cls_008">every  state  variable  from t−1</span></div>
+<div style="position:absolute;left:298.04px;top:193.15px" class="cls_008"><span class="cls_008">to  t</span></div>
+<div style="position:absolute;left:106.37px;top:202.62px" class="cls_007"><span class="cls_007">15</span></div>
+<div style="position:absolute;left:125.37px;top:202.62px" class="cls_008"><span class="cls_008">//</span></div>
+<div style="position:absolute;left:106.37px;top:212.08px" class="cls_007"><span class="cls_007">16</span></div>
+<div style="position:absolute;left:125.37px;top:212.08px" class="cls_008"><span class="cls_008">//returns  the most  likely  path  through  the  state  space</span></div>
+<div style="position:absolute;left:106.37px;top:221.55px" class="cls_007"><span class="cls_007">17</span></div>
+<div style="position:absolute;left:125.37px;top:221.55px" class="cls_008"><span class="cls_008">//parameters:  int []  obs  the  sequence  of  observations ,  int  t  the</span></div>
+<div style="position:absolute;left:145.82px;top:231.01px" class="cls_008"><span class="cls_008">current  time  slice  t,</span></div>
+<div style="position:absolute;left:106.37px;top:240.47px" class="cls_007"><span class="cls_007">18</span></div>
+<div style="position:absolute;left:125.37px;top:240.47px" class="cls_008"><span class="cls_008">//double []  past probabilities  the  probability  distribution  of  state</span></div>
+<div style="position:absolute;left:151.11px;top:249.94px" class="cls_008"><span class="cls_008">variables  at  time t−1,  int [][]  viterbiPath  set  of  backPointers</span></div>
+<div style="position:absolute;left:151.09px;top:259.40px" class="cls_008"><span class="cls_008">for  every  t</span></div>
+<div style="position:absolute;left:106.37px;top:268.87px" class="cls_007"><span class="cls_007">19</span></div>
+<div style="position:absolute;left:125.98px;top:268.87px" class="cls_009"><span class="cls_009">private  int</span><span class="cls_007"> []  viterbi(</span><span class="cls_009">int</span><span class="cls_007"> []  obs,</span><span class="cls_009">  int</span><span class="cls_007">  t,</span><span class="cls_009">  double</span><span class="cls_007"> []  past probabilities</span></div>
+<div style="position:absolute;left:146.09px;top:278.33px" class="cls_007"><span class="cls_007">,</span><span class="cls_009">  int</span><span class="cls_007"> [][]  viterbiPath){</span></div>
+<div style="position:absolute;left:106.37px;top:287.80px" class="cls_007"><span class="cls_007">20</span></div>
+<div style="position:absolute;left:106.37px;top:297.26px" class="cls_007"><span class="cls_007">21</span></div>
+<div style="position:absolute;left:135.53px;top:297.26px" class="cls_008"><span class="cls_008">//Base Case</span></div>
+<div style="position:absolute;left:106.37px;top:306.73px" class="cls_007"><span class="cls_007">22</span></div>
+<div style="position:absolute;left:106.37px;top:316.19px" class="cls_007"><span class="cls_007">23</span></div>
+<div style="position:absolute;left:135.53px;top:316.19px" class="cls_008"><span class="cls_008">//backtrack  through  the  set  of  backpointers</span></div>
+<div style="position:absolute;left:106.37px;top:325.66px" class="cls_007"><span class="cls_007">24</span></div>
+<div style="position:absolute;left:136.70px;top:325.66px" class="cls_009"><span class="cls_009">if</span></div>
+<div style="position:absolute;left:151.10px;top:325.66px" class="cls_007"><span class="cls_007">(t</span></div>
+<div style="position:absolute;left:163.95px;top:325.66px" class="cls_007"><span class="cls_007">>=  o b s . l e n g t h ) {</span></div>
+<div style="position:absolute;left:106.37px;top:335.12px" class="cls_007"><span class="cls_007">25</span></div>
+<div style="position:absolute;left:146.19px;top:335.12px" class="cls_009"><span class="cls_009">return</span><span class="cls_007">  backtracking(viterbiPath ,  past probabilities);</span></div>
+<div style="position:absolute;left:106.37px;top:344.58px" class="cls_007"><span class="cls_007">26</span></div>
+<div style="position:absolute;left:135.39px;top:344.58px" class="cls_007"><span class="cls_007">}</span></div>
+<div style="position:absolute;left:106.37px;top:354.05px" class="cls_007"><span class="cls_007">27</span></div>
+<div style="position:absolute;left:106.37px;top:363.51px" class="cls_007"><span class="cls_007">28</span></div>
+<div style="position:absolute;left:135.53px;top:363.51px" class="cls_008"><span class="cls_008">//Recursive  Case</span></div>
+<div style="position:absolute;left:106.37px;top:372.98px" class="cls_007"><span class="cls_007">29</span></div>
+<div style="position:absolute;left:106.37px;top:382.44px" class="cls_007"><span class="cls_007">30</span></div>
+<div style="position:absolute;left:135.53px;top:382.44px" class="cls_008"><span class="cls_008">//get Ot</span></div>
+<div style="position:absolute;left:106.37px;top:391.91px" class="cls_007"><span class="cls_007">31</span></div>
+<div style="position:absolute;left:135.69px;top:391.91px" class="cls_007"><span class="cls_007">Matrix obs mod = observation model[obs[t ]];</span></div>
+<div style="position:absolute;left:106.37px;top:401.37px" class="cls_007"><span class="cls_007">32</span></div>
+<div style="position:absolute;left:106.37px;top:410.84px" class="cls_007"><span class="cls_007">33</span></div>
+<div style="position:absolute;left:135.53px;top:410.84px" class="cls_008"><span class="cls_008">//new set  of  backpointers  and  set  of  probability  distribution</span></div>
+<div style="position:absolute;left:155.80px;top:420.30px" class="cls_008"><span class="cls_008">over  state  variables</span></div>
+<div style="position:absolute;left:106.37px;top:429.76px" class="cls_007"><span class="cls_007">34</span></div>
+<div style="position:absolute;left:136.18px;top:429.76px" class="cls_009"><span class="cls_009">int</span><span class="cls_007"> []  subPath</span></div>
+<div style="position:absolute;left:205.35px;top:429.76px" class="cls_007"><span class="cls_007">=</span><span class="cls_009"> new  int</span><span class="cls_007"> [ p a s t  p r o b a b i l i t i e s . length ] ;</span></div>
+<div style="position:absolute;left:106.37px;top:439.23px" class="cls_007"><span class="cls_007">35</span></div>
+<div style="position:absolute;left:135.83px;top:439.23px" class="cls_009"><span class="cls_009">double</span><span class="cls_007"> []  current probabilities</span></div>
+<div style="position:absolute;left:291.72px;top:439.23px" class="cls_007"><span class="cls_007">=</span><span class="cls_009"> new  double</span><span class="cls_007"> [ p a s t  p r o b a b i l i t i e s .</span></div>
+<div style="position:absolute;left:155.95px;top:448.69px" class="cls_007"><span class="cls_007">length ];</span></div>
+<div style="position:absolute;left:106.37px;top:458.16px" class="cls_007"><span class="cls_007">36</span></div>
+<div style="position:absolute;left:106.37px;top:467.62px" class="cls_007"><span class="cls_007">37</span></div>
+<div style="position:absolute;left:135.53px;top:467.62px" class="cls_008"><span class="cls_008">// for  every  variable  x t ,  get  the max P( x1</span></div>
+<div style="position:absolute;left:354.18px;top:467.62px" class="cls_008"><span class="cls_008">t|X t−1)</span></div>
+<div style="position:absolute;left:106.37px;top:477.09px" class="cls_007"><span class="cls_007">38</span></div>
+<div style="position:absolute;left:136.25px;top:477.09px" class="cls_009"><span class="cls_009">for</span></div>
+<div style="position:absolute;left:156.18px;top:477.09px" class="cls_007"><span class="cls_007">(</span><span class="cls_009">int</span><span class="cls_007">  state variable current=0;  state variable current&lt;</span></div>
+<div style="position:absolute;left:156.09px;top:486.55px" class="cls_007"><span class="cls_007">transition model . rows () ;  state variable current++){</span></div>
+<div style="position:absolute;left:106.37px;top:496.02px" class="cls_007"><span class="cls_007">39</span></div>
+<div style="position:absolute;left:106.37px;top:505.48px" class="cls_007"><span class="cls_007">40</span></div>
+<div style="position:absolute;left:146.35px;top:505.48px" class="cls_009"><span class="cls_009">int</span><span class="cls_007"> max = 0;</span></div>
+<div style="position:absolute;left:211.75px;top:505.48px" class="cls_008"><span class="cls_008">//the max variable</span></div>
+<div style="position:absolute;left:106.37px;top:514.95px" class="cls_007"><span class="cls_007">41</span></div>
+<div style="position:absolute;left:145.99px;top:514.95px" class="cls_009"><span class="cls_009">double</span><span class="cls_007"> max prob = 0;</span></div>
+<div style="position:absolute;left:252.39px;top:514.95px" class="cls_008"><span class="cls_008">//the max probability</span></div>
+<div style="position:absolute;left:106.37px;top:524.41px" class="cls_007"><span class="cls_007">42</span></div>
+<div style="position:absolute;left:145.99px;top:524.41px" class="cls_009"><span class="cls_009">double</span><span class="cls_007">  full prob</span></div>
+<div style="position:absolute;left:230.75px;top:524.41px" class="cls_007"><span class="cls_007">= 0;</span></div>
+<div style="position:absolute;left:106.37px;top:533.87px" class="cls_007"><span class="cls_007">43</span></div>
+<div style="position:absolute;left:106.37px;top:543.34px" class="cls_007"><span class="cls_007">44</span></div>
+<div style="position:absolute;left:145.69px;top:543.34px" class="cls_008"><span class="cls_008">// for  every  variable  x t−1</span></div>
+<div style="position:absolute;left:106.37px;top:552.80px" class="cls_007"><span class="cls_007">45</span></div>
+<div style="position:absolute;left:146.41px;top:552.80px" class="cls_009"><span class="cls_009">for</span></div>
+<div style="position:absolute;left:166.34px;top:552.80px" class="cls_007"><span class="cls_007">(</span><span class="cls_009">int</span><span class="cls_007">  state variable past=0;  state variable past&lt;</span></div>
+<div style="position:absolute;left:166.25px;top:562.27px" class="cls_007"><span class="cls_007">transition model . columns () ;  state variable past++){</span></div>
+<div style="position:absolute;left:106.37px;top:571.73px" class="cls_007"><span class="cls_007">46</span></div>
+<div style="position:absolute;left:106.37px;top:581.20px" class="cls_007"><span class="cls_007">47</span></div>
+<div style="position:absolute;left:156.15px;top:581.20px" class="cls_009"><span class="cls_009">double</span><span class="cls_007">  probabilityOfstate variable</span></div>
+<div style="position:absolute;left:332.37px;top:581.20px" class="cls_007"><span class="cls_007">= transition model.get(</span></div>
+<div style="position:absolute;left:176.53px;top:590.66px" class="cls_007"><span class="cls_007">state variable current ,  state variable past)∗obs mod.get(</span></div>
+<div style="position:absolute;left:176.53px;top:600.13px" class="cls_007"><span class="cls_007">state variable current ,  state variable current)∗</span></div>
+<div style="position:absolute;left:176.64px;top:609.59px" class="cls_007"><span class="cls_007">past probabilities [ state variable past ];</span></div>
+<div style="position:absolute;left:106.37px;top:619.06px" class="cls_007"><span class="cls_007">48</span></div>
+<div style="position:absolute;left:106.37px;top:628.52px" class="cls_007"><span class="cls_007">49</span></div>
+<div style="position:absolute;left:157.03px;top:628.52px" class="cls_009"><span class="cls_009">if</span></div>
+<div style="position:absolute;left:171.43px;top:628.52px" class="cls_007"><span class="cls_007">(probabilityOfstate variable</span></div>
+<div style="position:absolute;left:316.88px;top:628.52px" class="cls_007"><span class="cls_007">> max prob){</span></div>
+<div style="position:absolute;left:106.37px;top:637.98px" class="cls_007"><span class="cls_007">50</span></div>
+<div style="position:absolute;left:165.32px;top:637.98px" class="cls_007"><span class="cls_007">max =  s t a t e  v a r i a b l e  p a s t ;</span></div>
+<div style="position:absolute;left:106.37px;top:647.45px" class="cls_007"><span class="cls_007">51</span></div>
+<div style="position:absolute;left:165.99px;top:647.45px" class="cls_007"><span class="cls_007">max prob = probabilityOfstate variable ;</span></div>
+<div style="position:absolute;left:106.37px;top:656.91px" class="cls_007"><span class="cls_007">52</span></div>
+<div style="position:absolute;left:155.71px;top:656.91px" class="cls_007"><span class="cls_007">}</span></div>
+<div style="position:absolute;left:106.37px;top:666.38px" class="cls_007"><span class="cls_007">53</span></div>
+<div style="position:absolute;left:156.66px;top:666.38px" class="cls_007"><span class="cls_007">full prob</span></div>
+<div style="position:absolute;left:205.09px;top:666.38px" class="cls_007"><span class="cls_007">+=  p r o b a b i l i t y O f s t a t e  v a r i a b l e ;</span></div>
+<div style="position:absolute;left:106.37px;top:675.84px" class="cls_007"><span class="cls_007">54</span></div>
+<div style="position:absolute;left:106.37px;top:685.31px" class="cls_007"><span class="cls_007">55</span></div>
+<div style="position:absolute;left:145.55px;top:685.31px" class="cls_007"><span class="cls_007">}</span></div>
+<div style="position:absolute;left:106.37px;top:694.77px" class="cls_007"><span class="cls_007">56</span></div>
+<div style="position:absolute;left:106.37px;top:704.24px" class="cls_007"><span class="cls_007">57</span></div>
+<div style="position:absolute;left:145.69px;top:704.24px" class="cls_008"><span class="cls_008">//add  backpointer</span></div>
+<div style="position:absolute;left:291.68px;top:740.60px" class="cls_005"><span class="cls_005">18</span></div>
+</div>
+<div style="position:absolute;left:50%;margin-left:-297px;top:15318px;width:595px;height:841px;border-style:outset;overflow:hidden">
+<div style="position:absolute;left:0px;top:0px">
+<img src="image_src/background19.jpg" width=595 height=841></div>
+<div style="position:absolute;left:106.37px;top:126.90px" class="cls_007"><span class="cls_007">58</span></div>
+<div style="position:absolute;left:145.73px;top:126.90px" class="cls_007"><span class="cls_007">subPath[ state variable current ]</span></div>
+<div style="position:absolute;left:306.97px;top:126.90px" class="cls_007"><span class="cls_007">= max ;</span></div>
+<div style="position:absolute;left:106.37px;top:136.37px" class="cls_007"><span class="cls_007">59</span></div>
+<div style="position:absolute;left:106.37px;top:145.83px" class="cls_007"><span class="cls_007">60</span></div>
+<div style="position:absolute;left:166.02px;top:145.83px" class="cls_008"><span class="cls_008">//The On the  last  iteration ,  get  the  combined  probability</span></div>
+<div style="position:absolute;left:186.49px;top:155.29px" class="cls_008"><span class="cls_008">of  a  state.</span></div>
+<div style="position:absolute;left:106.37px;top:164.76px" class="cls_007"><span class="cls_007">61</span></div>
+<div style="position:absolute;left:166.02px;top:164.76px" class="cls_008"><span class="cls_008">//this  way  viterbi  chooses  the most  likely  path  to  the most</span></div>
+<div style="position:absolute;left:191.99px;top:174.22px" class="cls_008"><span class="cls_008">likely  state  at  t</span></div>
+<div style="position:absolute;left:106.37px;top:183.69px" class="cls_007"><span class="cls_007">62</span></div>
+<div style="position:absolute;left:146.86px;top:183.69px" class="cls_009"><span class="cls_009">if</span></div>
+<div style="position:absolute;left:161.26px;top:183.69px" class="cls_007"><span class="cls_007">( obs . length −1 == t ){</span></div>
+<div style="position:absolute;left:106.37px;top:193.15px" class="cls_007"><span class="cls_007">63</span></div>
+<div style="position:absolute;left:155.84px;top:193.15px" class="cls_007"><span class="cls_007">System.out.println(state variable current</span></div>
+<div style="position:absolute;left:367.94px;top:193.15px" class="cls_007"><span class="cls_007">+</span><span class="cls_010"> ” ”</span><span class="cls_007"> + max prob);</span></div>
+<div style="position:absolute;left:106.37px;top:202.62px" class="cls_007"><span class="cls_007">64</span></div>
+<div style="position:absolute;left:155.85px;top:202.62px" class="cls_008"><span class="cls_008">//add max P( x t | X t−1)</span></div>
+<div style="position:absolute;left:106.37px;top:212.08px" class="cls_007"><span class="cls_007">65</span></div>
+<div style="position:absolute;left:156.71px;top:212.08px" class="cls_007"><span class="cls_007">current probabilities [ state variable current ]</span></div>
+<div style="position:absolute;left:388.02px;top:212.08px" class="cls_007"><span class="cls_007">+=  f u l l  p r o b ;</span></div>
+<div style="position:absolute;left:106.37px;top:221.55px" class="cls_007"><span class="cls_007">66</span></div>
+<div style="position:absolute;left:145.55px;top:221.55px" class="cls_007"><span class="cls_007">}</span></div>
+<div style="position:absolute;left:106.37px;top:231.01px" class="cls_007"><span class="cls_007">67</span></div>
+<div style="position:absolute;left:146.55px;top:231.01px" class="cls_009"><span class="cls_009">else</span><span class="cls_007">{</span></div>
+<div style="position:absolute;left:106.37px;top:240.47px" class="cls_007"><span class="cls_007">68</span></div>
+<div style="position:absolute;left:156.71px;top:240.47px" class="cls_007"><span class="cls_007">current probabilities [ state variable current ]</span></div>
+<div style="position:absolute;left:388.26px;top:240.47px" class="cls_007"><span class="cls_007">= max prob;</span></div>
+<div style="position:absolute;left:106.37px;top:249.94px" class="cls_007"><span class="cls_007">69</span></div>
+<div style="position:absolute;left:145.55px;top:249.94px" class="cls_007"><span class="cls_007">}</span></div>
+<div style="position:absolute;left:106.37px;top:259.40px" class="cls_007"><span class="cls_007">70</span></div>
+<div style="position:absolute;left:106.37px;top:268.87px" class="cls_007"><span class="cls_007">71</span></div>
+<div style="position:absolute;left:135.39px;top:268.87px" class="cls_007"><span class="cls_007">}</span></div>
+<div style="position:absolute;left:106.37px;top:278.33px" class="cls_007"><span class="cls_007">72</span></div>
+<div style="position:absolute;left:136.10px;top:278.33px" class="cls_007"><span class="cls_007">viterbiPath[t]</span></div>
+<div style="position:absolute;left:210.43px;top:278.33px" class="cls_007"><span class="cls_007">= subPath;</span></div>
+<div style="position:absolute;left:106.37px;top:287.80px" class="cls_007"><span class="cls_007">73</span></div>
+<div style="position:absolute;left:106.37px;top:297.26px" class="cls_007"><span class="cls_007">74</span></div>
+<div style="position:absolute;left:135.53px;top:297.26px" class="cls_008"><span class="cls_008">//recurse</span></div>
+<div style="position:absolute;left:106.37px;top:306.73px" class="cls_007"><span class="cls_007">75</span></div>
+<div style="position:absolute;left:136.02px;top:306.73px" class="cls_009"><span class="cls_009">return</span><span class="cls_007">  viterbi(obs,  t+1,  current probabilities ,  viterbiPath);</span></div>
+<div style="position:absolute;left:106.37px;top:316.19px" class="cls_007"><span class="cls_007">76</span></div>
+<div style="position:absolute;left:125.22px;top:316.19px" class="cls_007"><span class="cls_007">}</span></div>
+<div style="position:absolute;left:106.37px;top:325.66px" class="cls_007"><span class="cls_007">77</span></div>
+<div style="position:absolute;left:106.37px;top:335.12px" class="cls_007"><span class="cls_007">78</span></div>
+<div style="position:absolute;left:125.37px;top:335.12px" class="cls_008"><span class="cls_008">//Backtrack  through  the most  likely  path</span></div>
+<div style="position:absolute;left:106.37px;top:344.58px" class="cls_007"><span class="cls_007">79</span></div>
+<div style="position:absolute;left:125.37px;top:344.58px" class="cls_008"><span class="cls_008">//at  each  time t,  a  variable  points  backward  to  which  state  most</span></div>
+<div style="position:absolute;left:146.26px;top:354.05px" class="cls_008"><span class="cls_008">likely  transitioned  to  it</span></div>
+<div style="position:absolute;left:106.37px;top:363.51px" class="cls_007"><span class="cls_007">80</span></div>
+<div style="position:absolute;left:125.37px;top:363.51px" class="cls_008"><span class="cls_008">//</span></div>
+<div style="position:absolute;left:106.37px;top:372.98px" class="cls_007"><span class="cls_007">81</span></div>
+<div style="position:absolute;left:125.37px;top:372.98px" class="cls_008"><span class="cls_008">//returns  int []  path.  an array  of  ints  representing  the most  likely</span></div>
+<div style="position:absolute;left:150.49px;top:382.44px" class="cls_008"><span class="cls_008">path  through  state  space</span></div>
+<div style="position:absolute;left:106.37px;top:391.91px" class="cls_007"><span class="cls_007">82</span></div>
+<div style="position:absolute;left:125.37px;top:391.91px" class="cls_008"><span class="cls_008">//parameters:  viterbiPath  is  the  set  of  backpointers  at  every  time</span></div>
+<div style="position:absolute;left:145.32px;top:401.37px" class="cls_008"><span class="cls_008">t,  double []  past probabilities  the  distribution  of  state</span></div>
+<div style="position:absolute;left:146.02px;top:410.84px" class="cls_008"><span class="cls_008">variables  over  time  t</span></div>
+<div style="position:absolute;left:106.37px;top:420.30px" class="cls_007"><span class="cls_007">83</span></div>
+<div style="position:absolute;left:125.98px;top:420.30px" class="cls_009"><span class="cls_009">private  int</span><span class="cls_007"> []  backtracking(</span><span class="cls_009">int</span><span class="cls_007"> [][]  viterbiPath ,</span><span class="cls_009">  double</span><span class="cls_007"> []</span></div>
+<div style="position:absolute;left:146.16px;top:429.76px" class="cls_007"><span class="cls_007">past probabilities){</span></div>
+<div style="position:absolute;left:106.37px;top:439.23px" class="cls_007"><span class="cls_007">84</span></div>
+<div style="position:absolute;left:135.53px;top:439.23px" class="cls_008"><span class="cls_008">//System.out.println(past probabilities [26]</span></div>
+<div style="position:absolute;left:357.78px;top:439.23px" class="cls_008"><span class="cls_008">+ ” ” +</span></div>
+<div style="position:absolute;left:156.32px;top:448.69px" class="cls_008"><span class="cls_008">past probabilities [7]</span></div>
+<div style="position:absolute;left:265.92px;top:448.69px" class="cls_008"><span class="cls_008">+ ” ” + past probabilities[9]+</span></div>
+<div style="position:absolute;left:424.61px;top:448.69px" class="cls_008"><span class="cls_008">”</span></div>
+<div style="position:absolute;left:434.77px;top:448.69px" class="cls_008"><span class="cls_008">” +</span></div>
+<div style="position:absolute;left:156.32px;top:458.16px" class="cls_008"><span class="cls_008">past probabilities[13]+</span></div>
+<div style="position:absolute;left:277.26px;top:458.16px" class="cls_008"><span class="cls_008">”</span></div>
+<div style="position:absolute;left:287.42px;top:458.16px" class="cls_008"><span class="cls_008">” + past probabilities[16]+</span></div>
+<div style="position:absolute;left:429.69px;top:458.16px" class="cls_008"><span class="cls_008">”</span></div>
+<div style="position:absolute;left:439.85px;top:458.16px" class="cls_008"><span class="cls_008">” +</span></div>
+<div style="position:absolute;left:156.32px;top:467.62px" class="cls_008"><span class="cls_008">past probabilities [20]</span></div>
+<div style="position:absolute;left:271.00px;top:467.62px" class="cls_008"><span class="cls_008">+ ” ” + past probabilities [35]) ;</span></div>
+<div style="position:absolute;left:106.37px;top:477.09px" class="cls_007"><span class="cls_007">85</span></div>
+<div style="position:absolute;left:136.18px;top:477.09px" class="cls_009"><span class="cls_009">int</span><span class="cls_007"> []  path</span></div>
+<div style="position:absolute;left:190.10px;top:477.09px" class="cls_007"><span class="cls_007">=</span><span class="cls_009"> new  int</span><span class="cls_007"> [ viterbiPath . length ] ;</span></div>
+<div style="position:absolute;left:106.37px;top:486.55px" class="cls_007"><span class="cls_007">86</span></div>
+<div style="position:absolute;left:106.37px;top:496.02px" class="cls_007"><span class="cls_007">87</span></div>
+<div style="position:absolute;left:135.53px;top:496.02px" class="cls_008"><span class="cls_008">//Find  the most  probable  state  at  time  t</span></div>
+<div style="position:absolute;left:106.37px;top:505.48px" class="cls_007"><span class="cls_007">88</span></div>
+<div style="position:absolute;left:135.53px;top:505.48px" class="cls_008"><span class="cls_008">//we  will  backtrack  through  the  path  that  let  to  this  state</span></div>
+<div style="position:absolute;left:106.37px;top:514.95px" class="cls_007"><span class="cls_007">89</span></div>
+<div style="position:absolute;left:136.18px;top:514.95px" class="cls_009"><span class="cls_009">int</span><span class="cls_007"> max = 0;</span></div>
+<div style="position:absolute;left:106.37px;top:524.41px" class="cls_007"><span class="cls_007">90</span></div>
+<div style="position:absolute;left:135.83px;top:524.41px" class="cls_009"><span class="cls_009">double</span><span class="cls_007"> max prob = 0;</span></div>
+<div style="position:absolute;left:106.37px;top:533.87px" class="cls_007"><span class="cls_007">91</span></div>
+<div style="position:absolute;left:136.25px;top:533.87px" class="cls_009"><span class="cls_009">for</span></div>
+<div style="position:absolute;left:156.18px;top:533.87px" class="cls_007"><span class="cls_007">( </span><span class="cls_009">int</span><span class="cls_007">  j =0; j&lt;past probabilities . length ;  j++){</span></div>
+<div style="position:absolute;left:106.37px;top:543.34px" class="cls_007"><span class="cls_007">92</span></div>
+<div style="position:absolute;left:146.86px;top:543.34px" class="cls_009"><span class="cls_009">if</span></div>
+<div style="position:absolute;left:161.26px;top:543.34px" class="cls_007"><span class="cls_007">(max prob&lt;past probabilities [j ]){</span></div>
+<div style="position:absolute;left:106.37px;top:552.80px" class="cls_007"><span class="cls_007">93</span></div>
+<div style="position:absolute;left:155.16px;top:552.80px" class="cls_007"><span class="cls_007">max =  j ;</span></div>
+<div style="position:absolute;left:106.37px;top:562.27px" class="cls_007"><span class="cls_007">94</span></div>
+<div style="position:absolute;left:155.83px;top:562.27px" class="cls_007"><span class="cls_007">max prob = past probabilities [j ];</span></div>
+<div style="position:absolute;left:106.37px;top:571.73px" class="cls_007"><span class="cls_007">95</span></div>
+<div style="position:absolute;left:145.55px;top:571.73px" class="cls_007"><span class="cls_007">}</span></div>
+<div style="position:absolute;left:106.37px;top:581.20px" class="cls_007"><span class="cls_007">96</span></div>
+<div style="position:absolute;left:135.39px;top:581.20px" class="cls_007"><span class="cls_007">}</span></div>
+<div style="position:absolute;left:106.37px;top:590.66px" class="cls_007"><span class="cls_007">97</span></div>
+<div style="position:absolute;left:106.37px;top:600.13px" class="cls_007"><span class="cls_007">98</span></div>
+<div style="position:absolute;left:106.37px;top:609.59px" class="cls_007"><span class="cls_007">99</span></div>
+<div style="position:absolute;left:135.64px;top:609.59px" class="cls_007"><span class="cls_007">path[viterbiPath.length−1]</span></div>
+<div style="position:absolute;left:271.40px;top:609.59px" class="cls_007"><span class="cls_007">= max ;</span></div>
+<div style="position:absolute;left:102.14px;top:619.06px" class="cls_007"><span class="cls_007">100</span></div>
+<div style="position:absolute;left:136.03px;top:619.06px" class="cls_009"><span class="cls_009">return</span><span class="cls_007">  backtracking(viterbiPath ,  viterbiPath.length−1, path);</span></div>
+<div style="position:absolute;left:102.14px;top:628.52px" class="cls_007"><span class="cls_007">101</span></div>
+<div style="position:absolute;left:125.22px;top:628.52px" class="cls_007"><span class="cls_007">}</span></div>
+<div style="position:absolute;left:102.14px;top:637.98px" class="cls_007"><span class="cls_007">102</span></div>
+<div style="position:absolute;left:102.14px;top:647.45px" class="cls_007"><span class="cls_007">103</span></div>
+<div style="position:absolute;left:125.37px;top:647.45px" class="cls_008"><span class="cls_008">//Backtrack  through  the most  likely  path</span></div>
+<div style="position:absolute;left:102.14px;top:656.91px" class="cls_007"><span class="cls_007">104</span></div>
+<div style="position:absolute;left:125.37px;top:656.91px" class="cls_008"><span class="cls_008">//at  each  time t,  a  variable  points  backward  to  which  state  most</span></div>
+<div style="position:absolute;left:146.26px;top:666.38px" class="cls_008"><span class="cls_008">likely  transitioned  to  it</span></div>
+<div style="position:absolute;left:102.14px;top:675.84px" class="cls_007"><span class="cls_007">105</span></div>
+<div style="position:absolute;left:125.37px;top:675.84px" class="cls_008"><span class="cls_008">//</span></div>
+<div style="position:absolute;left:102.14px;top:685.31px" class="cls_007"><span class="cls_007">106</span></div>
+<div style="position:absolute;left:125.37px;top:685.31px" class="cls_008"><span class="cls_008">//returns  int []  path</span></div>
+<div style="position:absolute;left:102.14px;top:694.77px" class="cls_007"><span class="cls_007">107</span></div>
+<div style="position:absolute;left:125.37px;top:694.77px" class="cls_008"><span class="cls_008">//parameters:  viterbiPath  is  the  set  of  backpointers  at  every  time</span></div>
+<div style="position:absolute;left:145.32px;top:704.24px" class="cls_008"><span class="cls_008">t,</span></div>
+<div style="position:absolute;left:291.68px;top:740.60px" class="cls_005"><span class="cls_005">19</span></div>
+</div>
+<div style="position:absolute;left:50%;margin-left:-297px;top:16169px;width:595px;height:841px;border-style:outset;overflow:hidden">
+<div style="position:absolute;left:0px;top:0px">
+<img src="image_src/background20.jpg" width=595 height=841></div>
+<div style="position:absolute;left:102.14px;top:126.90px" class="cls_007"><span class="cls_007">108</span></div>
+<div style="position:absolute;left:125.98px;top:126.90px" class="cls_009"><span class="cls_009">private  int</span><span class="cls_007"> []  backtracking(</span><span class="cls_009">int</span><span class="cls_007"> [][]  viterbiPath ,</span><span class="cls_009">  int</span><span class="cls_007">  t,</span><span class="cls_009">  int</span><span class="cls_007"> []  path){</span></div>
+<div style="position:absolute;left:102.14px;top:136.37px" class="cls_007"><span class="cls_007">109</span></div>
+<div style="position:absolute;left:102.14px;top:145.83px" class="cls_007"><span class="cls_007">110</span></div>
+<div style="position:absolute;left:135.53px;top:145.83px" class="cls_008"><span class="cls_008">//Base Case</span></div>
+<div style="position:absolute;left:102.14px;top:155.29px" class="cls_007"><span class="cls_007">111</span></div>
+<div style="position:absolute;left:136.70px;top:155.29px" class="cls_009"><span class="cls_009">if</span></div>
+<div style="position:absolute;left:151.10px;top:155.29px" class="cls_007"><span class="cls_007">(t</span></div>
+<div style="position:absolute;left:164.45px;top:155.29px" class="cls_007"><span class="cls_007">==  0 ) {</span></div>
+<div style="position:absolute;left:102.14px;top:164.76px" class="cls_007"><span class="cls_007">112</span></div>
+<div style="position:absolute;left:146.19px;top:164.76px" class="cls_009"><span class="cls_009">return</span><span class="cls_007">  path;</span></div>
+<div style="position:absolute;left:102.14px;top:174.22px" class="cls_007"><span class="cls_007">113</span></div>
+<div style="position:absolute;left:135.39px;top:174.22px" class="cls_007"><span class="cls_007">}</span></div>
+<div style="position:absolute;left:102.14px;top:183.69px" class="cls_007"><span class="cls_007">114</span></div>
+<div style="position:absolute;left:102.14px;top:193.15px" class="cls_007"><span class="cls_007">115</span></div>
+<div style="position:absolute;left:135.53px;top:193.15px" class="cls_008"><span class="cls_008">//recursive  case</span></div>
+<div style="position:absolute;left:102.14px;top:202.62px" class="cls_007"><span class="cls_007">116</span></div>
+<div style="position:absolute;left:135.64px;top:202.62px" class="cls_007"><span class="cls_007">path[t−1] = viterbiPath[t ][path[t ]];</span></div>
+<div style="position:absolute;left:102.14px;top:212.08px" class="cls_007"><span class="cls_007">117</span></div>
+<div style="position:absolute;left:136.03px;top:212.08px" class="cls_009"><span class="cls_009">return</span><span class="cls_007">  backtracking(viterbiPath ,  t−1, path);</span></div>
+<div style="position:absolute;left:102.14px;top:221.55px" class="cls_007"><span class="cls_007">118</span></div>
+<div style="position:absolute;left:102.14px;top:231.01px" class="cls_007"><span class="cls_007">119</span></div>
+<div style="position:absolute;left:125.22px;top:231.01px" class="cls_007"><span class="cls_007">}</span></div>
+<div style="position:absolute;left:124.80px;top:260.89px" class="cls_003"><span class="cls_003">6.2</span></div>
+<div style="position:absolute;left:155.44px;top:260.89px" class="cls_003"><span class="cls_003">Viterbi Results</span></div>
+<div style="position:absolute;left:124.80px;top:281.27px" class="cls_005"><span class="cls_005">The Viterbi algorithm doesn’t always find the actual path taken by the robot.</span></div>
+<div style="position:absolute;left:124.80px;top:293.23px" class="cls_005"><span class="cls_005">In cases where there are two equi-probable paths, the viterbi algorithm has no</span></div>
+<div style="position:absolute;left:124.80px;top:305.18px" class="cls_005"><span class="cls_005">tie breaker method, and returns one of the equi-probable with not particular</span></div>
+<div style="position:absolute;left:124.80px;top:317.14px" class="cls_005"><span class="cls_005">discresion.  Figure 15 shows the true path of the robot.  Figure 16 shows the</span></div>
+<div style="position:absolute;left:124.80px;top:329.09px" class="cls_005"><span class="cls_005">path returned by Viterbi, and that the path returned by Viterbi was equally as</span></div>
+<div style="position:absolute;left:124.80px;top:341.05px" class="cls_005"><span class="cls_005">probable as the path taken.</span></div>
+<div style="position:absolute;left:248.84px;top:683.74px" class="cls_005"><span class="cls_005">Figure 13: path taken</span></div>
+<div style="position:absolute;left:291.68px;top:740.60px" class="cls_005"><span class="cls_005">20</span></div>
+</div>
+<div style="position:absolute;left:50%;margin-left:-297px;top:17020px;width:595px;height:841px;border-style:outset;overflow:hidden">
+<div style="position:absolute;left:0px;top:0px">
+<img src="image_src/background21.jpg" width=595 height=841></div>
+<div style="position:absolute;left:246.47px;top:572.03px" class="cls_005"><span class="cls_005">Figure 14: viterbi path</span></div>
+<div style="position:absolute;left:139.75px;top:597.88px" class="cls_005"><span class="cls_005">Figures 17 and 18 show a similar phenomenon as figures 15 and 16. In this</span></div>
+<div style="position:absolute;left:124.80px;top:609.84px" class="cls_005"><span class="cls_005">case, the robot finds it’s way to the appropirate end tile, but on it’s way instead</span></div>
+<div style="position:absolute;left:124.80px;top:621.79px" class="cls_005"><span class="cls_005">of moving on an upward path along the red tiles, it starts and remains on the</span></div>
+<div style="position:absolute;left:124.80px;top:633.75px" class="cls_005"><span class="cls_005">red tile between the two walls.</span></div>
+<div style="position:absolute;left:291.68px;top:740.60px" class="cls_005"><span class="cls_005">21</span></div>
+</div>
+<div style="position:absolute;left:50%;margin-left:-297px;top:17871px;width:595px;height:841px;border-style:outset;overflow:hidden">
+<div style="position:absolute;left:0px;top:0px">
+<img src="image_src/background22.jpg" width=595 height=841></div>
+<div style="position:absolute;left:248.84px;top:388.76px" class="cls_005"><span class="cls_005">Figure 15: path taken</span></div>
+<div style="position:absolute;left:246.47px;top:686.33px" class="cls_005"><span class="cls_005">Figure 16: viterbi path</span></div>
+<div style="position:absolute;left:139.75px;top:710.71px" class="cls_005"><span class="cls_005">The maze in figures 19 and 20 is very redundant. Each quadrant is identical.</span></div>
+<div style="position:absolute;left:291.68px;top:740.60px" class="cls_005"><span class="cls_005">22</span></div>
+</div>
+<div style="position:absolute;left:50%;margin-left:-297px;top:18722px;width:595px;height:841px;border-style:outset;overflow:hidden">
+<div style="position:absolute;left:0px;top:0px">
+<img src="image_src/background23.jpg" width=595 height=841></div>
+<div style="position:absolute;left:124.80px;top:124.91px" class="cls_005"><span class="cls_005">Viterbi has a particularly difficult time finding the actual path taken by the</span></div>
+<div style="position:absolute;left:124.80px;top:136.86px" class="cls_005"><span class="cls_005">robot in redundant state spaces.</span></div>
+<div style="position:absolute;left:248.84px;top:501.53px" class="cls_005"><span class="cls_005">Figure 17: path taken</span></div>
+<div style="position:absolute;left:139.75px;top:527.38px" class="cls_005"><span class="cls_005">Note the probability distribution at time t.  It is not concentrated on one</span></div>
+<div style="position:absolute;left:124.80px;top:539.33px" class="cls_005"><span class="cls_005">tile. Rather it is spread accross all green tiles. All but one tile has a path to it</span></div>
+<div style="position:absolute;left:124.80px;top:551.29px" class="cls_005"><span class="cls_005">which fits the observation sequence.</span></div>
+<div style="position:absolute;left:291.68px;top:740.60px" class="cls_005"><span class="cls_005">23</span></div>
+</div>
+<div style="position:absolute;left:50%;margin-left:-297px;top:19573px;width:595px;height:841px;border-style:outset;overflow:hidden">
+<div style="position:absolute;left:0px;top:0px">
+<img src="image_src/background24.jpg" width=595 height=841></div>
+<div style="position:absolute;left:246.47px;top:463.74px" class="cls_005"><span class="cls_005">Figure 18: viterbi path</span></div>
+<div style="position:absolute;left:139.75px;top:489.59px" class="cls_005"><span class="cls_005">Figure 21 illustrates the number of paths through the maze.</span></div>
+<div style="position:absolute;left:291.68px;top:740.60px" class="cls_005"><span class="cls_005">24</span></div>
+</div>
+<div style="position:absolute;left:50%;margin-left:-297px;top:20424px;width:595px;height:841px;border-style:outset;overflow:hidden">
+<div style="position:absolute;left:0px;top:0px">
+<img src="image_src/background25.jpg" width=595 height=841></div>
+<div style="position:absolute;left:144.80px;top:497.04px" class="cls_005"><span class="cls_005">Figure 19: vizualization of most paths in maze given the observations</span></div>
+<div style="position:absolute;left:124.80px;top:527.54px" class="cls_004"><span class="cls_004">7</span></div>
+<div style="position:absolute;left:149.01px;top:527.54px" class="cls_004"><span class="cls_004">Conclusion</span></div>
+<div style="position:absolute;left:124.80px;top:553.74px" class="cls_005"><span class="cls_005">Using HMMs, the robot was able to udate its belief state of location in the</span></div>
+<div style="position:absolute;left:124.80px;top:565.70px" class="cls_005"><span class="cls_005">maze very efficiently, with good accuracy using filtering. When looking at past</span></div>
+<div style="position:absolute;left:124.80px;top:577.65px" class="cls_005"><span class="cls_005">states, the robot was able to determine its location with great accuracy with</span></div>
+<div style="position:absolute;left:124.80px;top:589.61px" class="cls_005"><span class="cls_005">some sacrifice of memory using the forward-backward algorithm.  And it was</span></div>
+<div style="position:absolute;left:124.80px;top:601.56px" class="cls_005"><span class="cls_005">able to find a path maximized over the probability of locations over time Viterbi.</span></div>
+<div style="position:absolute;left:124.80px;top:613.52px" class="cls_005"><span class="cls_005">While prone to errors, using HMMs to infer the unobservable location of the</span></div>
+<div style="position:absolute;left:124.80px;top:625.47px" class="cls_005"><span class="cls_005">robot in the maze was powerful given the low time complexities with respect to</span></div>
+<div style="position:absolute;left:124.80px;top:637.43px" class="cls_005"><span class="cls_005">time.</span></div>
+<div style="position:absolute;left:124.80px;top:665.99px" class="cls_004"><span class="cls_004">8</span></div>
+<div style="position:absolute;left:149.01px;top:665.99px" class="cls_004"><span class="cls_004">References</span></div>
+<div style="position:absolute;left:124.80px;top:692.19px" class="cls_005"><span class="cls_005">Russell, Stuart J., and Peter Norvig.</span></div>
+<div style="position:absolute;left:303.53px;top:692.19px" class="cls_005"><span class="cls_005">”Chapter 15 Probabilistic Reasoning</span></div>
+<div style="position:absolute;left:124.80px;top:704.15px" class="cls_005"><span class="cls_005">Over Time.” Artificial Intelligence: A Modern Approach. Upper Saddle River:</span></div>
+<div style="position:absolute;left:291.68px;top:740.60px" class="cls_005"><span class="cls_005">25</span></div>
+</div>
+<div style="position:absolute;left:50%;margin-left:-297px;top:21275px;width:595px;height:841px;border-style:outset;overflow:hidden">
+<div style="position:absolute;left:0px;top:0px">
+<img src="image_src/background26.jpg" width=595 height=841></div>
+<div style="position:absolute;left:124.80px;top:124.91px" class="cls_005"><span class="cls_005">Prentice-Hall, 2010. N. pag. Print.</span></div>
+<div style="position:absolute;left:291.68px;top:740.60px" class="cls_005"><span class="cls_005">26</span></div>
+</div>
+
+</body>
+</html>
